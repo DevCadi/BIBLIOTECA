@@ -1,9 +1,5 @@
 from flask import Flask, request, render_template
-<<<<<<< HEAD
-from controllers import categoria_controllers, autores_controllers, usuario_controllers, audio_controllers, bibliotecario_controllers, editorial_controllers, video_controllers
-=======
-from controllers import categoria_controllers, autores_controllers, usuario_controllers, audio_controllers, bibliotecario_controllers, editorial_controllers, libro_controllers
->>>>>>> 2acc5a907f49107689aae3b4eee199d12ee84fe8
+from controllers import categoria_controllers, autores_controllers, usuario_controllers, audio_controllers, bibliotecario_controllers, editorial_controllers, video_controllers, libro_controllers
 from database import db
 
 app = Flask(__name__)
@@ -19,12 +15,8 @@ app.register_blueprint(bibliotecario_controllers.bibliotecario_bp)
 app.register_blueprint(categoria_controllers.categoria_bp)
 app.register_blueprint(autores_controllers.autor_bp)
 app.register_blueprint(editorial_controllers.editorial_bp)
-<<<<<<< HEAD
 app.register_blueprint(video_controllers.video_bp)
-=======
 app.register_blueprint(libro_controllers.libro_bp)
->>>>>>> 2acc5a907f49107689aae3b4eee199d12ee84fe8
-
 
 #@app.route("/")
 #def home():
