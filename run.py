@@ -1,6 +1,10 @@
 from flask import Flask, request, render_template
 
 from controllers import categoria_controllers, autores_controllers, usuario_controllers, audio_controllers, bibliotecario_controllers, editorial_controllers, video_controllers, libro_controllers,material_controllers, prestamo_controllers, proyectos_academicos_controllers
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8f88598b123f2fc4a6671099fa68676e944ffdf4
 from database import db
 
 app = Flask(__name__)
