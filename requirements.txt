@@ -1,0 +1,5 @@
+flask
+flask-sqlalchemy
+pandas openpyxl xhtml2pdf
+openpyxl reportlab
+fpdf
