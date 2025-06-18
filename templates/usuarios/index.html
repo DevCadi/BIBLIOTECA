@@ -37,5 +37,17 @@
     </tr>
     {% endfor %}
 </table>
+<!-- aqui generamos reportes de usuarios-->
+<div class="mb-3 text-end">
+    <div class="btn-group">
+        <button class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Generar Reporte
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{{ url_for('reporte.excel_usuarios') }}">Exportar a Excel</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('reporte.pdf_usuarios') }}">Exportar a PDF</a></li>
+        </ul>
+    </div>
+</div>
 
 {% endblock %}

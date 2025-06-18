@@ -66,3 +66,16 @@ class Usuario(db.Model):
     def delete(self):
         db.session.delete(self)
         db.session.commit()
+        
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "nombre": self.nombre,
+            "apellido": self.apellido,
+            "email": self.email,
+            "telefono": self.telefono,
+            "username": self.username,
+            "tipo": self.tipo
+            # No incluimos la contraseña por seguridad
+        }

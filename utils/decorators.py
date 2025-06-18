@@ -14,8 +14,10 @@ def role_required(*roles):
     def decorator(f):
         @wraps(f)
         def decorated_function(*args, **kwargs):
-            if 'tipo' not in session or session['tipo'] not in roles:
+            # CAMBIADO: 'tipo' → 'usuario_tipo'
+            if 'usuario_tipo' not in session or session['usuario_tipo'] not in roles:
                 abort(403)
             return f(*args, **kwargs)
         return decorated_function
     return decorator
+

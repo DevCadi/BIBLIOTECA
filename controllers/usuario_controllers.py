@@ -8,8 +8,7 @@ usuario_bp = Blueprint('usuario', __name__, url_prefix="/usuarios")
 
 
 @usuario_bp.route("/")
-@login_required
-@role_required('admin', 'bibliotecario')
+
 def index():
     usuarios = Usuario.get_all()
     return usuario_view.list(usuarios)
@@ -17,7 +16,7 @@ def index():
 
 @usuario_bp.route("/create", methods=['GET', 'POST'])
 @login_required
-@role_required('admin')  # Solo admin puede crear
+@role_required('Admin')  # Solo admin puede crear
 def create():
     if request.method == 'POST':
         nombre = request.form['nombre']
@@ -36,12 +35,12 @@ def create():
 
 @usuario_bp.route("/edit/<int:id>", methods=['GET', 'POST'])
 @login_required
-@role_required('admin', 'bibliotecario')
+@role_required('Admin', 'Bibliotecario')
 def edit(id):
     usuario = Usuario.get_by_id(id)
 
     # Solo admin puede editar todo; bibliotecario solo puede editar lectores
-    if session['tipo'] == 'bibliotecario' and usuario.tipo != 'lector':
+    if session['tipo'] == 'Bibliotecario' and usuario.tipo != 'Lector':
         abort(403)  # Prohibido
 
     if request.method == 'POST':
@@ -54,7 +53,7 @@ def edit(id):
         tipo = request.form['tipo']
 
         # Verificación para que bibliotecario no pueda cambiar el tipo a admin o bibliotecario
-        if session['tipo'] == 'bibliotecario' and tipo != 'lector':
+        if session['tipo'] == 'Bibliotecario' and tipo != 'Lector':
             abort(403)
 
         usuario.update(nombre=nombre, apellido=apellido, email=email,
@@ -66,12 +65,12 @@ def edit(id):
 
 @usuario_bp.route("/delete/<int:id>")
 @login_required
-@role_required('admin', 'bibliotecario')
+@role_required('Admin', 'Bibliotecario')
 def delete(id):
     usuario = Usuario.get_by_id(id)
 
     # Solo admin puede eliminar admin o bibliotecario
-    if session['tipo'] == 'bibliotecario' and usuario.tipo != 'lector':
+    if session['tipo'] == 'Bibliotecario' and usuario.tipo != 'Lector':
         abort(403)
 
     usuario.delete()

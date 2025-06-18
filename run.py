@@ -2,7 +2,7 @@ from flask import Flask, request, render_template, session, redirect, url_for
 
 from models.material_model import Material
 
-from controllers import categoria_controllers, autores_controllers, usuario_controllers, audio_controllers, bibliotecario_controllers, editorial_controllers, video_controllers, libro_controllers,material_controllers, prestamo_controllers, proyectos_academicos_controllers, auth_controllers
+from controllers import categoria_controllers, autores_controllers, usuario_controllers, audio_controllers, bibliotecario_controllers, editorial_controllers, video_controllers, libro_controllers,material_controllers, prestamo_controllers, proyectos_academicos_controllers, auth_controllers, reporte_controllers
 
 from database import db
 
@@ -27,7 +27,7 @@ app.register_blueprint(material_controllers.material_bp)
 app.register_blueprint(prestamo_controllers.prestamo_bp)
 app.register_blueprint(proyectos_academicos_controllers.proyecto_bp)
 app.register_blueprint(auth_controllers.auth_bp)
-
+app.register_blueprint(reporte_controllers.reporte_bp)
 
 @app.route("/")
 def home():

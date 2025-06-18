@@ -4,8 +4,40 @@
     <meta charset="UTF-8">
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .floating-btn {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            background-color: #007bff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .left-btn {
+            left: 10px;
+        }
+        .right-btn {
+            right: 10px;
+        }
+        .floating-btn img {
+            width: 30px;
+            height: 30px;
+        }
+    </style>
 </head>
 <body class="bg-light">
+    <a href="#" class="floating-btn left-btn" title="Sobre Biblioteca">
+        <img src="/static/info.png" alt="Info">
+    </a>
+    <a href="#" class="floating-btn right-btn" title="Contacto">
+        <img src="/static/contact.png" alt="Contacto">
+    </a>
     <div class="container mt-5">
         <div class="card mx-auto" style="max-width: 400px;">
             <div class="card-body">
@@ -29,5 +61,8 @@
             </div>
         </div>
     </div>
+    <footer class="text-center mt-5 text-muted">
+        <p>&copy; 2025 Biblioteca Virtual - Todos los derechos reservados</p>
+    </footer>
 </body>
 </html>
