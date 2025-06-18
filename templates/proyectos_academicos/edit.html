@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %} PROYECTOS | EDIT {% endblock %}
+
+{% block content %}
+<h1>Actualización de proyectos</h1>
+<form action="{{url_for('proyecto.edit',id_pro=proyecto.id_pro)}}" method="POST">
+    <div class="mb-3">
+        <label for="" class="form-label">Autor</label>
+        <input type="text" class="form-control" name="autor_est" value="{{proyecto.autor_est}}" required>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Año de defensa</label>
+        <input type="number" class="form-control" name="anio_defensa" value="{{proyecto.anio_defensa}}" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Actualizar proyectos</button>
+</form>
+
+{% endblock %}

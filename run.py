@@ -1,8 +1,12 @@
 from flask import Flask, request, render_template
+<<<<<<< HEAD
 
 
 from controllers import categoria_controllers, autores_controllers, usuario_controllers, audio_controllers, bibliotecario_controllers, editorial_controllers, video_controllers, libro_controllers,material_controllers, prestamo_controllers
 
+=======
+from controllers import categoria_controllers, autores_controllers, usuario_controllers, audio_controllers, bibliotecario_controllers, editorial_controllers, video_controllers, libro_controllers, material_controllers, proyectos_academicos_controllers
+>>>>>>> 62a116b63bff8671b718012ce54ba035ccb9f7f2
 from database import db
 
 app = Flask(__name__)
@@ -21,8 +25,12 @@ app.register_blueprint(editorial_controllers.editorial_bp)
 app.register_blueprint(video_controllers.video_bp)
 app.register_blueprint(libro_controllers.libro_bp)
 app.register_blueprint(material_controllers.material_bp)
+<<<<<<< HEAD
 app.register_blueprint(prestamo_controllers.prestamo_bp)
 
+=======
+app.register_blueprint(proyectos_academicos_controllers.proyecto_bp)
+>>>>>>> 62a116b63bff8671b718012ce54ba035ccb9f7f2
 
 @app.route("/")
 def home():
