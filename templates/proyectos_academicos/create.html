@@ -1,3 +1,8 @@
+{% extends 'base.html' %}
+
+{%block title%} LIBROS {% endblock %}
+
+{% block content %}
 
 <h1>Registro de proyectos</h1>
 <form action="{{url_for('proyecto.create')}}" method="POST">
@@ -11,4 +16,4 @@
     </div>
     <button type="submit" class="btn btn-primary">Registrar proyecto</button>
 </form>
-
+{% endblock %}
