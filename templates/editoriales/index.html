@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{%block title%} EDITORIALES {% endblock %}
+
+{% block content %}
+
+<h1>Lista de Editoriales</h1>
+<a href="{{url_for('editorial.create')}}" class="btn btn-success mb-3">Nueva Editorial</a>
+
+<table class="table table-striped">
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>País</th>
+        <th></th>
+        <th></th>
+    </tr>
+    {% for item in editoriales %}
+    <tr>
+        <td>{{item.id_edi}}</td>
+        <td>{{item.nombre}}</td>
+        <td>{{item.pais}}</td>
+        <td>
+            <a href="{{url_for('editorial.edit',id_edi=item.id_edi)}}" class="btn btn-warning">Editar</a>
+        </td>
+        <td>
+            <a href="{{url_for('editorial.delete',id_edi=item.id_edi)}}" class="btn btn-danger">Eliminar</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
