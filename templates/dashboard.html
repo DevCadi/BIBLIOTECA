@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Panel Principal - {{ session.usuario_tipo }}</h1>
+    <ul>
+        <li><a href="{{ url_for('usuario.index') }}">Gestíon de Usuarios</a></li>
+        <li><a href="{{ url_for('material.index') }}">Materiales</a></li>
+        <li><a href="{{ url_for('libro.index') }}">Libros</a></li>
+        <li><a href="{{ url_for('prestamo.index') }}">Préstamos</a></li>
+    </ul>
+    <a href="{{ url_for('auth.logout') }}">Cerrar sesión</a>
+</body>
+</html>

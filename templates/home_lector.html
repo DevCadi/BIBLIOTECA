@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio - Lector</title>
+</head>
+<body>
+    <h1>Bienvenido {{ session.usuario_nombre }}</h1>
+    <p>Novedades disponibles:</p>
+    <ul>
+        {% for material in materiales %}
+            <li>{{ material.titulo }} - {{ material.tipo }} ({{ material.estado }})</li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('auth.logout') }}">Cerrar sesión</a>
+</body>
+</html>
