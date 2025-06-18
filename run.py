@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template
-from controllers import categoria_controllers, autores_controllers, usuario_controllers, audio_controllers
+from controllers import categoria_controllers, autores_controllers, usuario_controllers, audio_controllers, bibliotecario_controllers
 from database import db
 
 app = Flask(__name__)
@@ -11,6 +11,7 @@ db.init_app(app)
 
 app.register_blueprint(audio_controllers.audio_bp)
 app.register_blueprint(usuario_controllers.usuario_bp)
+app.register_blueprint(bibliotecario_controllers.bibliotecario_bp)
 app.register_blueprint(categoria_controllers.categoria_bp)
 app.register_blueprint(autores_controllers.autor_bp)
 

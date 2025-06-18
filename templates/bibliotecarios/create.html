@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %} BIBLIOTECARIOS | CREATE {% endblock %}
+
+{% block content %}
+<h1>Registro de bibliotecarios</h1>
+<form action="{{url_for('bibliotecario.create')}}" method="POST">
+    <div class="mb-3">
+        <label for="" class="form-label">Turno</label>
+        <input type="text" class="form-control" name="turno" required>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Fecha de contratación</label>
+        <input type="date" class="form-control" name="fecha_contratacion" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Registrar bibliotecario</button>
+</form>
+
+
+{% endblock %}

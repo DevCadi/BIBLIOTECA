@@ -5,7 +5,7 @@ class Bibliotecario(db.Model):
 
     id_biblio = db.Column(db.Integer, primary_key=True)
     turno = db.Column(db.String(50), nullable=False)
-    fecha_contratacion = db.Column(db.Date, nullable=False)
+    fecha_contratacion = db.Column(db.String(50), nullable=False)
 
     def __init__(self, turno, fecha_contratacion):
         self.turno = turno
