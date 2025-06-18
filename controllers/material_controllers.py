@@ -23,10 +23,9 @@ def create():
         material = Material(tipo, titulo, fecha_ingreso, estado, id_categoria)
         material.save()
         return redirect(url_for('material.index'))
-    materiales = Material.query.all()
-    categoria = Categoria.query.all()
+    categorias = Categoria.query.all()
 
-    return material_view.create(materiales, categoria)
+    return material_view.create(categorias=categorias)
 
 @material_bp.route("/edit/<int:id_material>", methods=['GET', 'POST'])
 def edit(id_material):
@@ -40,10 +39,10 @@ def edit(id_material):
 
         material.update(tipo=tipo, titulo=titulo, fecha_ingreso=fecha_ingreso, estado=estado, id_categoria=id_categoria)
         return redirect(url_for('material.index'))
-    materiales = Material.query.all()
-    categoria = Categoria.query.all()
 
-    return material_view.edit(material, materiales, categoria)
+    categorias = Categoria.query.all()
+
+    return material_view.edit(material=material, categorias=categorias)
 
 @material_bp.route("/delete/<int:id_material>")
 def delete(id_material):

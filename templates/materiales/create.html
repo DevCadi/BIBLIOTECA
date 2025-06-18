@@ -25,8 +25,13 @@
             <input type="text" name="estado" class="form-control" required>
         </div>
         <div class="mb-3">
-            <label>ID Categoría</label>
-            <input type="number" name="id_categoria" class="form-control" required>
+            <label>Categoría</label>
+            <select name="id_categoria" class="form-control" required>
+                <option value="">Seleccione una categoría:</option>
+                {% for categoria in categorias %}
+                    <option value="{{categoria.id_cat}}">{{categoria.nombre}}</option>
+                {% endfor %}
+            </select>
         </div>
         <button type="submit" class="btn btn-success">Guardar</button>
         <a href="{{ url_for('material.index') }}" class="btn btn-secondary">Cancelar</a>
