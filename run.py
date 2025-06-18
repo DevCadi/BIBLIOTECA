@@ -1,12 +1,7 @@
 from flask import Flask, request, render_template
-<<<<<<< HEAD
-
-from controllers import categoria_controllers, autores_controllers, usuario_controllers, audio_controllers, bibliotecario_controllers, editorial_controllers, video_controllers, libro_controllers
 
 
-=======
-from controllers import categoria_controllers, autores_controllers, usuario_controllers, audio_controllers, bibliotecario_controllers, editorial_controllers, video_controllers, libro_controllers
->>>>>>> bc2b6ceea71b9928855bd3099066fd2d53a6d500
+from controllers import categoria_controllers, autores_controllers, usuario_controllers, audio_controllers, bibliotecario_controllers, editorial_controllers, video_controllers, libro_controllers,material_controllers 
 from database import db
 
 app = Flask(__name__)
@@ -24,10 +19,7 @@ app.register_blueprint(autores_controllers.autor_bp)
 app.register_blueprint(editorial_controllers.editorial_bp)
 app.register_blueprint(video_controllers.video_bp)
 app.register_blueprint(libro_controllers.libro_bp)
-<<<<<<< HEAD
-
-=======
->>>>>>> bc2b6ceea71b9928855bd3099066fd2d53a6d500
+app.register_blueprint(material_controllers.material_bp)
 
 
 @app.route("/")
