@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %} USUARIOS | EDIT {% endblock %}
+
+{% block content %}
+<h1>Actualizar usuario</h1>
+<form action="{{url_for('usuario.edit',id=usuario.id)}}" method="POST">
+    <div class="mb-3">
+        <label for="" class="form-label">Nombre</label>
+        <input type="text" class="form-control" name="nombre" value="{{usuario.nombre}}" required>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Apellido</label>
+        <input type="text" class="form-control" name="apellido" value="{{usuario.apellido}}" required>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Email</label>
+        <input type="email" class="form-control" name="email" value="{{usuario.email}}" required>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Telefono</label>
+        <input type="text" class="form-control" name="telefono" value="{{usuario.telefono}}" required>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Usuario</label>
+        <input type="text" class="form-control" name="username" value="{{usuario.username}}" required>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Password</label>
+        <input type="password" class="form-control" name="password">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Rol</label>
+        <select name="rol" class="form-select" required>
+            <option value="admin" {%if usuario.rol == 'admin'%}selected{%endif%}>Admin</option>
+            <option value="bibliotecario" {%if usuario.rol == 'cajero'%}selected{%endif%}>Bibliotecario</option>
+            <option value="Lector" {%if usuario.rol == 'bibliotecario'%}selected{%endif%}>Lector</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Registrar usuario</button>
+</form>
+
+
+{% endblock %}

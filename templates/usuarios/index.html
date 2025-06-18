@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{%block title%} USUARIOS {% endblock %}
+
+{% block content %}
+
+<h1>Lista de Usuarios</h1>
+<a href="{{url_for('usuario.create')}}" class="btn btn-success mb-3">Nuevo</a>
+
+<table class="table table-striped">
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Email</th>
+        <th>Telefono</th>
+        <th>Username</th>
+        <th>Rol</th>
+        <th></th>
+        <th></th>
+    </tr>
+    {% for item in usuarios %}
+    <tr>
+        <td>{{item.id}}</td>
+        <td>{{item.nombre}}</td>
+        <td>{{item.apellido}}</td>
+        <td>{{item.email}}</td>
+        <td>{{item.telefono}}</td>
+        <td>{{item.username}}</td>
+        <td>{{item.tipo}}</td>
+        <td>
+            <a href="{{url_for('usuario.edit',id=item.id)}}" class="btn btn-warning">Editar</a>
+        </td>
+        <td>
+            <a href="{{url_for('usuario.delete',id=item.id)}}" class="btn btn-danger">Eliminar</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
