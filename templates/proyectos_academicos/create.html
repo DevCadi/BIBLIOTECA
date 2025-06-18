@@ -1,8 +1,4 @@
-{% extends 'base.html' %}
 
-{% block title %} PROYECTOS | CREATE {% endblock %}
-
-{% block content %}
 <h1>Registro de proyectos</h1>
 <form action="{{url_for('proyecto.create')}}" method="POST">
     <div class="mb-3">
@@ -16,5 +12,3 @@
     <button type="submit" class="btn btn-primary">Registrar proyecto</button>
 </form>
 
-
-{% endblock %}
