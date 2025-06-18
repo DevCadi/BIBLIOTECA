@@ -1,8 +1,4 @@
-{% extends 'base.html' %}
 
-{% block title %} USUARIOS | CREATE {% endblock %}
-
-{% block content %}
 <h2>Editar Préstamo</h2>
 <form method="post">
     <div class="mb-3">
@@ -45,4 +41,3 @@
     <button type="submit" class="btn btn-primary">Actualizar</button>
     <a href="{{ url_for('prestamo.index') }}" class="btn btn-secondary">Cancelar</a>
 </form>
-{% endblock %}
