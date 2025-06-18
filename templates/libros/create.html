@@ -13,8 +13,22 @@
             <input type="number" name="isbn" class="form-control" required>
         </div>
         <div class="mb-3">
-            <label class="form-label">ID Editorial</label>
-            <input type="number" name="id_editorial" class="form-control" required>
+            <label>Titulo</label>
+            <select name="id_material" class="form-control" required>
+                <option value="">Seleccione un titulo:</option>
+                {% for material in materiales %}
+                    <option value="{{material.id_material}}">{{material.titulo}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Editorial</label>
+            <select name="id_editorial" class="form-control" required>
+                <option value="">Seleccione una editorial:</option>
+                {% for editorial in editoriales %}
+                    <option value="{{editorial.id_editorial}}">{{editorial.nombre}}</option>
+                {% endfor %}
+            </select>
         </div>
         <div class="mb-3">
             <label class="form-label">Año de Publicación</label>

@@ -1,11 +1,13 @@
 from database import db
 
 class Editorial(db.Model):
-    __tablename__ = "editorial"
+    __tablename__ = "editoriales"
 
-    id_edi = db.Column(db.Integer, primary_key=True)
+    id_editorial = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(50), nullable=False)
     pais = db.Column(db.String(50), nullable=False)
+
+    libros = db.relationship('Libro', back_populates='editorial')
 
     def __init__(self, nombre, pais):
         self.nombre = nombre
@@ -22,8 +24,8 @@ class Editorial(db.Model):
     
     #ver solo uno
     @staticmethod
-    def get_by_id(id_edi):
-        return Editorial.query.get(id_edi)
+    def get_by_id(id_editorial):
+        return Editorial.query.get(id_editorial)
     
     #actualizar
     def update(self, nombre=None, pais=None):

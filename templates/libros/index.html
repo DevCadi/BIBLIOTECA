@@ -10,7 +10,8 @@
             <tr>
                 <th>ID</th>
                 <th>ISBN</th>
-                <th>ID Editorial</th>
+                <th>Título</th>
+                <th>Editorial</th>
                 <th>Año Publicación</th>
                 <th>Acciones</th>
             </tr>
@@ -20,6 +21,7 @@
             <tr>
                 <td>{{ libro.id_libro }}</td>
                 <td>{{ libro.isbn }}</td>
+                <td>{{ libro.material.titulo }}</td>
                 <td>{{ libro.id_editorial }}</td>
                 <td>{{ libro.anio_publicacion }}</td>
                 <td>

@@ -21,9 +21,9 @@ def create():
         return redirect(url_for('editorial.index'))
     return editorial_view.create()
 
-@editorial_bp.route("/edit/<int:id_edi>", methods=['GET','POST'])
-def edit(id_edi):
-    editorial = Editorial.get_by_id(id_edi)
+@editorial_bp.route("/edit/<int:id_editorial>", methods=['GET','POST'])
+def edit(id_editorial):
+    editorial = Editorial.get_by_id(id_editorial)
     if request.method == 'POST':
         nombre = request.form['nombre']
         pais = request.form['pais']
@@ -32,8 +32,8 @@ def edit(id_edi):
         return redirect(url_for('editorial.index'))
     return editorial_view.edit(editorial)
 
-@editorial_bp.route("/delete/<int:id_edi>")
-def delete(id_edi):
-    editorial = Editorial.get_by_id(id_edi)
+@editorial_bp.route("/delete/<int:id_editorial>")
+def delete(id_editorial):
+    editorial = Editorial.get_by_id(id_editorial)
     editorial.delete()
     return redirect(url_for('editorial.index'))

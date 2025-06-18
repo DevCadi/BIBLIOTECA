@@ -17,14 +17,14 @@
     </tr>
     {% for item in editoriales %}
     <tr>
-        <td>{{item.id_edi}}</td>
+        <td>{{item.id_editorial}}</td>
         <td>{{item.nombre}}</td>
         <td>{{item.pais}}</td>
         <td>
-            <a href="{{url_for('editorial.edit',id_edi=item.id_edi)}}" class="btn btn-warning">Editar</a>
+            <a href="{{url_for('editorial.edit',id_editorial=item.id_editorial)}}" class="btn btn-warning">Editar</a>
         </td>
         <td>
-            <a href="{{url_for('editorial.delete',id_edi=item.id_edi)}}" class="btn btn-danger">Eliminar</a>
+            <a href="{{url_for('editorial.delete',id_editorial=item.id_editorial)}}" class="btn btn-danger">Eliminar</a>
         </td>
     </tr>
     {% endfor %}
