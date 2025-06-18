@@ -33,6 +33,15 @@
                 {% endfor %}
             </select>
         </div>
+        <div class="mb-3">
+            <label>Autor</label>
+            <select name="id_autor" class="form-control" required>
+                <option value="">Seleccione un autor:</option>
+                {% for autor in autores %}
+                    <option value="{{autor.id_autor}}">{{autor.nombre}}</option>
+                {% endfor %}
+            </select>
+        </div>
         <button type="submit" class="btn btn-success">Guardar</button>
         <a href="{{ url_for('material.index') }}" class="btn btn-secondary">Cancelar</a>
     </form>

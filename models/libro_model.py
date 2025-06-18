@@ -3,10 +3,12 @@ from database import db
 class Libro(db.Model):
     __tablename__ = 'libros'
 
-    id_libro = db.Column(db.Integer, primary_key=True)
+    id_libro = db.Column(db.Integer, db.ForeignKey('materiales.id_material'), primary_key=True)
     isbn = db.Column(db.Integer, nullable=False)
     id_editorial = db.Column(db.Integer, nullable=False)
     anio_publicacion = db.Column(db.String(4), nullable=False)  # o Integer si prefieres
+
+    material = db.relationship('Material', back_populates = 'libro')
 
     def __init__(self, isbn, id_editorial, anio_publicacion):
         self.isbn = isbn

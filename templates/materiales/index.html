@@ -15,6 +15,7 @@
                 <th>Fecha Ingreso</th>
                 <th>Estado</th>
                 <th>Categoría</th>
+                <th>Autor</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -27,6 +28,7 @@
                 <td>{{ mat.fecha_ingreso }}</td>
                 <td>{{ mat.estado }}</td>
                 <td>{{ mat.categoria.nombre }}</td>
+                <td>{{ mat.autor.nombre }}</td>
                 <td>
                     <a href="{{ url_for('material.edit', id_material=mat.id_material) }}" class="btn btn-warning btn-sm">Editar</a>
                     <a href="{{ url_for('material.delete', id_material=mat.id_material) }}" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro que quieres eliminarlo?')">Eliminar</a>

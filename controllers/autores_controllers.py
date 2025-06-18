@@ -15,9 +15,8 @@ def index():
 def create():
     if request.method == 'POST':
         nombre = request.form['nombre']
-        apellidos = request.form['apellidos']
 
-        autor = Autores(nombre, apellidos)
+        autor = Autores(nombre)
         autor.save()
         return redirect(url_for('autores.index'))
     return autores_view.create()
@@ -27,9 +26,8 @@ def edit(id_autor):
     autor = Autores.get_by_id(id_autor)
     if request.method == 'POST':
         nombre = request.form['nombre']
-        apellidos = request.form['apellidos']
         #actualizar
-        autor.update(nombre=nombre, apellidos=apellidos)
+        autor.update(nombre=nombre)
         return redirect(url_for('autores.index'))
     
     return autores_view.edit(autor)

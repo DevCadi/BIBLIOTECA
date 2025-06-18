@@ -4,13 +4,12 @@ class Autores(db.Model):
     __tablename__ = "autores"
 
     id_autor = db.Column(db.Integer,primary_key=True)
-    nombre = db.Column(db.String(80),nullable=False)
-    apellidos = db.Column(db.String(100),nullable=False)
+    nombre = db.Column(db.String(150),nullable=False)
 
+    materiales = db.relationship('Material', back_populates='autor')
 
-    def __init__(self, nombre, apellidos):
+    def __init__(self, nombre):
         self.nombre = nombre
-        self.apellidos = apellidos
     
     #tener un obj de tipo usuario y guardarlo en la bd
     def save(self):
@@ -28,10 +27,9 @@ class Autores(db.Model):
         return Autores.query.get(id)
     
     #metodo para actualizar
-    def update(self, nombre=None, apellidos=None):
-        if nombre and apellidos:
+    def update(self, nombre=None):
+        if nombre:
             self.nombre = nombre
-            self.apellidos = apellidos
         db.session.commit()
     
     #metodo delete
