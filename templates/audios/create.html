@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %} AUDIOS | CREATE {% endblock %}
+
+{% block content %}
+<h1>Registro de audios</h1>
+<form action="{{url_for('audio.create')}}" method="POST">
+    <div class="mb-3">
+        <label for="" class="form-label">Duracion</label>
+        <input type="text" class="form-control" name="duracion" required>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Formato</label>
+        <input type="text" class="form-control" name="formato" required>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Propietario</label>
+        <input type="text" class="form-control" name="propietario" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Registrar audio</button>
+</form>
+
+
+{% endblock %}

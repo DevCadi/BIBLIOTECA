@@ -7,8 +7,8 @@ audio_bp = Blueprint('audio',__name__,url_prefix="/audios")
 
 @audio_bp.route("/")
 def index():
-    audios = Audio.get_all()
-    return audio_view.list(audios)
+    audio = Audio.get_all()
+    return audio_view.list(audio)
 
 @audio_bp.route("/create", methods = ['GET','POST'])
 def create():
@@ -23,8 +23,8 @@ def create():
     return audio_view.create()
 
 @audio_bp.route("/edit/<int:id_audio>", methods=['GET','POST'])
-def edit(id_cat):
-    audio = audio.get_by_id(id_cat)
+def edit(id_audio):
+    audio = Audio.get_by_id(id_audio)
     if request.method == 'POST':
         duracion = request.form['duracion']
         formato = request.form['formato']
