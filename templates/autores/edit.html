@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %} AUTORES | EDIT {% endblock %}
+
+{% block content %}
+<h1>Actualización de autores</h1>
+<form action="{{url_for('autores.edit',id_autor=autores.id_autor)}}" method="POST">
+    <div class="mb-3">
+        <label for="" class="form-label">Nombre</label>
+        <input type="text" class="form-control" name="nombre" value="{{autores.nombre}}" required>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Apellidos</label>
+        <input type="text" class="form-control" name="apellidos" value="{{autores.apellidos}}" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Actualizar autores</button>
+</form>
+
+
+{% endblock %}

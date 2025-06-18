@@ -1,5 +1,5 @@
 from flask import Flask, request
-from controllers import categoria_controllers
+from controllers import categoria_controllers, autores_controllers
 from database import db
 
 app = Flask(__name__)
@@ -9,6 +9,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db.init_app(app)
 app.register_blueprint(categoria_controllers.categoria_bp)
+app.register_blueprint(autores_controllers.autor_bp)
 
 @app.route("/")
 def home():

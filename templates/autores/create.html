@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %} AUTORES | CREATE {% endblock %}
+
+{% block content %}
+<h1>Registro de autores</h1>
+<form action="{{url_for('autores.create')}}" method="POST">
+    <div class="mb-3">
+        <label for="" class="form-label">Nombre</label>
+        <input type="text" class="form-control" name="nombre" required>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Apellidos</label>
+        <input type="text" class="form-control" name="apellidos" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Registrar autor</button>
+</form>
+
+
+{% endblock %}

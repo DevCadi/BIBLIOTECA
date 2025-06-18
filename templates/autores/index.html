@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{%block title%} AUTORES {% endblock %}
+
+{% block content %}
+
+<h1>Lista de Autores</h1>
+<a href="{{url_for('autores.create')}}" class="btn btn-success mb-3">Nuevo Autor</a>
+
+<table class="table table-striped">
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Apellidos</th>
+        <th></th>
+        <th></th>
+    </tr>
+    {% for item in autores %}
+    <tr>
+        <td>{{item.id_autor}}</td>
+        <td>{{item.nombre}}</td>
+        <td>{{item.apellidos}}</td>
+        <td>
+            <a href="{{url_for('autores.edit',id_autor=item.id_autor)}}" class="btn btn-warning">Editar</a>
+        </td>
+        <td>
+            <a href="{{url_for('autores.delete',id_autor=item.id_autor)}}" class="btn btn-danger">Eliminar</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
