@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %} USUARIOS | CREATE {% endblock %}
+
+{% block content %}
+<h2>Editar Préstamo</h2>
+<form method="post">
+    <div class="mb-3">
+        <label>Usuario:</label>
+        <select name="id_usuario" class="form-control" required>
+            {% for u in usuarios %}
+            <option value="{{ u.id }}" {% if u.id == prestamo.id_usuario %}selected{% endif %}>
+                {{ u.nombre }} {{ u.apellido }}
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Bibliotecario:</label>
+        <select name="id_bibliotecario" class="form-control" required>
+            {% for b in usuarios %}
+            <option value="{{ b.id }}" {% if b.id == prestamo.id_bibliotecario %}selected{% endif %}>
+                {{ b.nombre }} {{ b.apellido }}
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Fecha de Préstamo:</label>
+        <input type="date" name="fecha_prestamo" class="form-control" value="{{ prestamo.fecha_prestamo }}" required>
+    </div>
+
+    <div class="mb-3">
+        <label>Fecha de Devolución:</label>
+        <input type="date" name="fecha_devolucion" class="form-control" value="{{ prestamo.fecha_devolucion }}" required>
+    </div>
+
+    <div class="mb-3">
+        <label>Estado:</label>
+        <input type="text" name="estado" class="form-control" value="{{ prestamo.estado }}" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+    <a href="{{ url_for('prestamo.index') }}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}
