@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{%block title%} PROYECTOS ACADÉMICOS {% endblock %}
+
+{% block content %}
+
+<h1>Lista de Proyectos Académicos</h1>
+<a href="{{url_for('proyecto.create')}}" class="btn btn-success mb-3">Nuevo Proyecto Académico</a>
+
+<table class="table table-striped">
+    <tr>
+        <th>ID</th>
+        <th>Autor</th>
+        <th>Año de Defensa</th>
+        <th></th>
+        <th></th>
+    </tr>
+    {% for item in proyectos %}
+    <tr>
+        <td>{{item.id_pro}}</td>
+        <td>{{item.autor_est}}</td>
+        <td>{{item.anio_defensa}}</td>
+        <td>
+            <a href="{{url_for('proyecto.edit',id_pro=item.id_pro)}}" class="btn btn-warning">Editar</a>
+        </td>
+        <td>
+            <a href="{{url_for('proyecto.delete',id_pro=item.id_pro)}}" class="btn btn-danger">Eliminar</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

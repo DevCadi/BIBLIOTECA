@@ -7,8 +7,8 @@ proyecto_bp = Blueprint('proyecto',__name__,url_prefix="/proyectos")
 
 @proyecto_bp.route("/")
 def index():
-    proyecto = Proyecto.get_all()
-    return proyectos_academicos_view.list(proyecto)
+    proyectos = Proyecto.get_all()
+    return proyectos_academicos_view.list(proyectos)
 
 @proyecto_bp.route("/create", methods = ['GET','POST'])
 def create():
