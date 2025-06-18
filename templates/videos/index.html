@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{%block title%} VIDEOS {% endblock %}
+
+{% block content %}
+
+<h1>Lista de Videos</h1>
+<a href="{{url_for('video.create')}}" class="btn btn-success mb-3">Nuevo video</a>
+
+<table class="table table-striped">
+    <tr>
+        <th>ID</th>
+        <th>Duracion</th>
+        <th>Formato</th>
+        <th>Director</th>
+        <th></th>
+        <th></th>
+    </tr>
+    {% for item in videos %}
+    <tr>
+        <td>{{item.id_video}}</td>
+        <td>{{item.duracion}}</td>
+        <td>{{item.formato}}</td>
+        <td>{{item.director}}</td>
+        <td>
+            <a href="{{url_for('video.edit',id_video=item.id_video)}}" class="btn btn-warning">Editar</a>
+        </td>
+        <td>
+            <a href="{{url_for('video.delete',id_video=item.id_video)}}" class="btn btn-danger">Eliminar</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
