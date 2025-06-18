@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Libro</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container mt-4">
+    <h1>Editar Libro</h1>
+    <form method="post">
+        <div class="mb-3">
+            <label class="form-label">ISBN</label>
+            <input type="number" name="isbn" class="form-control" value="{{ libro.isbn }}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">ID Editorial</label>
+            <input type="number" name="id_editorial" class="form-control" value="{{ libro.id_editorial }}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Año de Publicación</label>
+            <input type="text" name="anio_publicacion" class="form-control" value="{{ libro.anio_publicacion }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Actualizar</button>
+        <a href="{{ url_for('libro.index') }}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</body>
+</html>
