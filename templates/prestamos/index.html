@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %} USUARIOS | CREATE {% endblock %}
+
+{% block content %}
+<h1>Lista de Préstamos</h1>
+<a href="{{ url_for('prestamo.create') }}" class="btn btn-primary">Nuevo</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th><th>Usuario</th><th>Bibliotecario</th><th>F. Préstamo</th><th>F. Devolución</th><th>Estado</th><th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in prestamos %}
+        <tr>
+            <td>{{ p.id_prestamo }}</td>
+            <td>{{ (usuarios | selectattr("id", "equalto", p.id_usuario) | first).nombre }}</td>
+            <td>{{ (usuarios | selectattr("id", "equalto", p.id_bibliotecario) | first).nombre }}</td>
+            <td>{{ p.fecha_prestamo }}</td>
+            <td>{{ p.fecha_devolucion }}</td>
+            <td>{{ p.estado }}</td>
+            <td>
+                <a href="{{ url_for('prestamo.edit', id_prestamo=p.id_prestamo) }}" class="btn btn-sm btn-warning">Editar</a>
+                <a href="{{ url_for('prestamo.delete', id_prestamo=p.id_prestamo) }}" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar?')">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
