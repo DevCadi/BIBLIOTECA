@@ -6,6 +6,8 @@ class Categoria(db.Model):
     id_cat = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(50), nullable=False)
 
+    materiales = db.relationship('Material', back_populates='categoria')
+
     def __init__(self, nombre):
         self.nombre = nombre
 

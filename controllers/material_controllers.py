@@ -1,5 +1,7 @@
 from flask import request, redirect, url_for, Blueprint
 from models.material_model import Material
+from models.categoria_model import Categoria
+from views import categoria_view
 from views import material_view
 
 material_bp = Blueprint('material', __name__, url_prefix='/materiales')
@@ -21,8 +23,10 @@ def create():
         material = Material(tipo, titulo, fecha_ingreso, estado, id_categoria)
         material.save()
         return redirect(url_for('material.index'))
+    materiales = Material.query.all()
+    categoria = Categoria.query.all()
 
-    return material_view.create()
+    return material_view.create(materiales, categoria)
 
 @material_bp.route("/edit/<int:id_material>", methods=['GET', 'POST'])
 def edit(id_material):
@@ -36,8 +40,10 @@ def edit(id_material):
 
         material.update(tipo=tipo, titulo=titulo, fecha_ingreso=fecha_ingreso, estado=estado, id_categoria=id_categoria)
         return redirect(url_for('material.index'))
+    materiales = Material.query.all()
+    categoria = Categoria.query.all()
 
-    return material_view.edit(material)
+    return material_view.edit(material, materiales, categoria)
 
 @material_bp.route("/delete/<int:id_material>")
 def delete(id_material):
