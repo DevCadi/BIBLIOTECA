@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %} CATEGORIA | CREATE {% endblock %}
+
+{% block content %}
+<h1>Registro de categorias</h1>
+<form action="{{url_for('categoria.create')}}" method="POST">
+    <div class="mb-3">
+        <label for="" class="form-label">Nombre</label>
+        <input type="text" class="form-control" name="nombre" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Registrar Categoria</button>
+</form>
+
+
+{% endblock %}

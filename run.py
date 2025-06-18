@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 from controllers import categoria_controllers
 from controllers import usuario_controllers
 from database import db
@@ -9,11 +9,15 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///biblioteca.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db.init_app(app)
+
 app.register_blueprint(usuario_controllers.usuario_bp)
+
+app.register_blueprint(categoria_controllers.categoria_bp)
+
 
 @app.route("/")
 def home():
-    return "<h1>Aplicación Biblioteca HOLAAAAAAAA</h1>"
+    return render_template("")
 
 if __name__ == "__main__":
     with app.app_context():
