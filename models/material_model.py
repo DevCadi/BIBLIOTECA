@@ -8,7 +8,9 @@ class Material(db.Model):
     titulo = db.Column(db.String(100), nullable=False)
     fecha_ingreso = db.Column(db.String(20), nullable=False)
     estado = db.Column(db.String(20), nullable=False)
-    id_categoria = db.Column(db.Integer, nullable=False)
+    id_categoria = db.Column(db.Integer, db.ForeignKey('categoria.id_cat'),nullable=False)
+
+    categoria = db.relationship('Categoria', back_populates='materiales')
 
     def __init__(self, tipo, titulo, fecha_ingreso, estado, id_categoria):
         self.tipo = tipo

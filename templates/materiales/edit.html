@@ -25,8 +25,13 @@
             <input type="text" name="estado" class="form-control" value="{{ material.estado }}" required>
         </div>
         <div class="mb-3">
-            <label>ID Categoría</label>
-            <input type="number" name="id_categoria" class="form-control" value="{{ material.id_categoria }}" required>
+            <label>Categoría</label>
+            <select name="producto_id" class="form-control" required>
+                <option value="">Seleccione una categoría:</option>
+                {% for categoria in categorias %}
+                    <option value="{{categoria.id_cat}}"  {% if categoria.id_cat== material.id_categoria %} selected {% endif %}>{{categoria.nombre}}</option>
+                {% endfor %}
+            </select>
         </div>
         <button type="submit" class="btn btn-primary">Actualizar</button>
         <a href="{{ url_for('material.index') }}" class="btn btn-secondary">Cancelar</a>
