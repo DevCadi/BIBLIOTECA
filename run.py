@@ -1,11 +1,5 @@
-<<<<<<< HEAD
-from flask import Flask, request
-from controllers import categoria_controllers, autores_controllers
-=======
 from flask import Flask, request, render_template
-from controllers import categoria_controllers
-from controllers import usuario_controllers
->>>>>>> 53fb63521f4130f21b4e45c5eed3a086181176d6
+from controllers import categoria_controllers, autores_controllers, usuario_controllers
 from database import db
 
 app = Flask(__name__)
@@ -21,9 +15,9 @@ app.register_blueprint(categoria_controllers.categoria_bp)
 app.register_blueprint(autores_controllers.autor_bp)
 
 
-@app.route("/")
-def home():
-    return render_template("")
+#@app.route("/")
+#def home():
+#    return render_template("")
 
 if __name__ == "__main__":
     with app.app_context():
