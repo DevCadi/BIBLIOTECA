@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %} VIDEOS | EDIT {% endblock %}
+
+{% block content %}
+<h1>Actualización de videos</h1>
+<form action="{{url_for('video.edit',id_video=video.id_video)}}" method="POST">
+    <div class="mb-3">
+        <label for="" class="form-label">Duracion</label>
+        <input type="text" class="form-control" name="duracion" value="{{video.duracion}}" required>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Formato</label>
+        <input type="text" class="form-control" name="formato" value="{{video.formato}}" required>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Director</label>
+        <input type="text" class="form-control" name="director" value="{{video.director}}" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Actualizar video</button>
+</form>
+
+
+{% endblock %}
