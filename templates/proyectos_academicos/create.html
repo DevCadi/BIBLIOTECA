@@ -7,6 +7,15 @@
 <h1>Registro de proyectos</h1>
 <form action="{{url_for('proyecto.create')}}" method="POST">
     <div class="mb-3">
+        <label>Titulo</label>
+        <select name="id_material" class="form-control" required>
+            <option value="">Seleccione un titulo:</option>
+            {% for material in materiales %}
+                <option value="{{material.id_material}}">{{material.titulo}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
         <label for="" class="form-label">Autor</label>
         <input type="text" class="form-control" name="autor_est" required>
     </div>

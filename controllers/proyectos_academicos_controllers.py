@@ -3,7 +3,7 @@ from models.material_model import Material
 from models.proyectos_academicos_model import  Proyecto
 from views import proyectos_academicos_view
 
-proyecto_bp = Blueprint('proyecto',__name__,url_prefix="/proyectos")
+proyecto_bp = Blueprint('proyecto',__name__,url_prefix="/proyectos_academicos")
 
 @proyecto_bp.route("/")
 def index():
@@ -20,8 +20,8 @@ def create():
         proyecto = Proyecto(id_material, autor_est, anio_defensa)
         proyecto.save()
         return redirect(url_for('proyecto.index'))
-    material = Material.query.all()
-    return proyectos_academicos_view.create(material=material)
+    materiales = Material.query.all()
+    return proyectos_academicos_view.create(materiales=materiales)
 
 @proyecto_bp.route("/edit/<int:id_pro>", methods=['GET','POST'])
 def edit(id_pro):
@@ -33,8 +33,8 @@ def edit(id_pro):
 
         proyecto.update(id_material=id_material, autor_est=autor_est, anio_defensa=anio_defensa)
         return redirect(url_for('proyecto.index'))
-    material = Material.query.all()
-    return proyectos_academicos_view.edit(proyecto=proyecto, material=material)
+    materiales = Material.query.all()
+    return proyectos_academicos_view.edit(proyecto=proyecto, materiales=materiales)
 
 @proyecto_bp.route("/delete/<int:id_pro>")
 def delete(id_pro):
