@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, session, redirect, url_for
 
 from models.material_model import Material
+from models.usuario_model import Usuario
 
 from controllers import categoria_controllers, autores_controllers, usuario_controllers, audio_controllers, bibliotecario_controllers, editorial_controllers, video_controllers, libro_controllers,material_controllers, prestamo_controllers, proyectos_academicos_controllers, auth_controllers, reporte_controllers
 
@@ -44,9 +45,25 @@ def home():
     materiales = Material.query.all()
     return render_template('home_lector.html', materiales=materiales)
 
-
+def crear_admin_inicial():
+    admin_existente = Usuario.query.filter_by(tipo="Admin").first()
+    if not admin_existente:
+        admin = Usuario(
+            nombre="Genesis",
+            apellido="Campos",
+            email="genesis@gmail.com",
+            telefono="77587271",
+            username="admin",
+            password="123", 
+            tipo="Admin"
+        )
+        admin.save()
+        print("Usuario Admin creado automáticamente.")
+    else:
+        print("Usuario Admin ya existe.")
 
 if __name__ == "__main__":
     with app.app_context():
+        crear_admin_inicial()
         db.create_all()
     app.run(debug=True)
