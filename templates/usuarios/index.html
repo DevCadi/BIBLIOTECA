@@ -44,7 +44,12 @@
             <a href="{{url_for('usuario.edit',id=item.id)}}" class="btn btn-warning">Editar</a>
         </td>
         <td>
-            <a href="{{url_for('usuario.delete',id=item.id)}}" class="btn btn-danger">Eliminar</a>
+            <a href="{{ url_for('usuario.delete', id=item.id) }}"
+   class="btn btn-danger"
+   onclick="return confirm('¿Estás seguro de que deseas eliminar a {{ item.nombre }} {{ item.apellido }}?');">
+   Eliminar
+</a>
+
         </td>
     </tr>
     {% endfor %}

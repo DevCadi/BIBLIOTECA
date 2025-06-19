@@ -22,7 +22,12 @@
             <a href="{{url_for('categoria.edit',id_cat=item.id_cat)}}" class="btn btn-warning">Editar</a>
         </td>
         <td>
-            <a href="{{url_for('categoria.delete',id_cat=item.id_cat)}}" class="btn btn-danger">Eliminar</a>
+            <a href="{{ url_for('categoria.delete', id_cat=item.id_cat) }}" 
+   class="btn btn-danger"
+   onclick="return confirm('¿Estás seguro de que deseas eliminar la categoría {{ item.nombre }}?');">
+   Eliminar
+</a>
+
         </td>
     </tr>
     {% endfor %}

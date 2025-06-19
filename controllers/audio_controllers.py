@@ -32,7 +32,7 @@ def edit(id_audio):
         id_material = request.form['id_material']
         duracion = request.form['duracion']
         formato = request.form['formato']
-        propietario = request.form['duracion']
+        propietario = request.form['propietario']
 
         audio.update(id_material=id_material, duracion=duracion, formato=formato, propietario=propietario)
         return redirect(url_for('audio.index'))

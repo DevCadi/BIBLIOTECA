@@ -26,7 +26,12 @@
             <a href="{{url_for('proyecto.edit',id_pro=item.id_pro)}}" class="btn btn-warning">Editar</a>
         </td>
         <td>
-            <a href="{{url_for('proyecto.delete',id_pro=item.id_pro)}}" class="btn btn-danger">Eliminar</a>
+            <a href="{{ url_for('proyecto.delete', id_pro=item.id_pro) }}"
+   class="btn btn-danger"
+   onclick="return confirm('¿Estás seguro de eliminar el proyecto académico {{ item.material.titulo }}?');">
+   Eliminar
+</a>
+
         </td>
     </tr>
     {% endfor %}

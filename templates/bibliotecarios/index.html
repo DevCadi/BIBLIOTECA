@@ -24,7 +24,12 @@
             <a href="{{url_for('bibliotecario.edit',id_biblio=item.id_biblio)}}" class="btn btn-warning">Editar</a>
         </td>
         <td>
-            <a href="{{url_for('bibliotecario.delete',id_biblio=item.id_biblio)}}" class="btn btn-danger">Eliminar</a>
+            <a href="{{ url_for('bibliotecario.delete', id_biblio=item.id_biblio) }}"
+   class="btn btn-danger"
+   onclick="return confirm('¿Estás seguro de que deseas eliminar al bibliotecario con ID {{ item.id_biblio }}?');">
+   Eliminar
+</a>
+
         </td>
     </tr>
     {% endfor %}
