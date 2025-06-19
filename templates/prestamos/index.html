@@ -1,32 +1,53 @@
 {% extends 'base.html' %}
 
-{% block title %} USUARIOS | CREATE {% endblock %}
+{% block title %} PRÉSTAMOS {% endblock %}
 
 {% block content %}
-<h1>Lista de Préstamos</h1>
-<a href="{{ url_for('prestamo.create') }}" class="btn btn-primary">Nuevo</a>
-<table class="table">
-    <thead>
-        <tr>
-            <th>ID</th><th>Usuario</th><th>Bibliotecario</th><th>F. Préstamo</th><th>F. Devolución</th><th>Estado</th><th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for p in prestamos %}
-        <tr>
-            <td>{{ p.id_prestamo }}</td>
-            <td>{{ (usuarios | selectattr("id", "equalto", p.id_usuario) | first).nombre }}</td>
-            <td>{{ (usuarios | selectattr("id", "equalto", p.id_bibliotecario) | first).nombre }}</td>
-            <td>{{ p.fecha_prestamo }}</td>
-            <td>{{ p.fecha_devolucion }}</td>
-            <td>{{ p.estado }}</td>
-            <td>
-                <a href="{{ url_for('prestamo.edit', id_prestamo=p.id_prestamo) }}" class="btn btn-sm btn-warning">Editar</a>
-                <a href="{{ url_for('prestamo.delete', id_prestamo=p.id_prestamo) }}" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar?')">Eliminar</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="container mt-4">
+    <h1 class="mb-4">Lista de Préstamos</h1>
 
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <a href="{{ url_for('prestamo.create') }}" class="btn btn-success">➕ Nuevo Préstamo</a>
+
+        <div class="btn-group">
+            <button class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                 Generar Reporte
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="{{ url_for('reporte.excel_prestamos') }}">Exportar a Excel</a></li>
+                <li><a class="dropdown-item" href="{{ url_for('reporte.pdf_prestamos') }}">Exportar a PDF</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <table class="table table-hover table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th>ID</th>
+                <th>Usuario</th>
+                <th>Bibliotecario</th>
+                <th>F. Préstamo</th>
+                <th>F. Devolución</th>
+                <th>Estado</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in prestamos %}
+            <tr>
+                <td>{{ p.id_prestamo }}</td>
+                <td>{{ (usuarios | selectattr("id", "equalto", p.id_usuario) | first).nombre }}</td>
+                <td>{{ (usuarios | selectattr("id", "equalto", p.id_bibliotecario) | first).nombre }}</td>
+                <td>{{ p.fecha_prestamo }}</td>
+                <td>{{ p.fecha_devolucion }}</td>
+                <td>{{ p.estado }}</td>
+                <td class="text-center">
+                    <a href="{{ url_for('prestamo.edit', id_prestamo=p.id_prestamo) }}" class="btn btn-sm btn-warning">✏️ Editar</a>
+                    <a href="{{ url_for('prestamo.delete', id_prestamo=p.id_prestamo) }}" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar este préstamo?')">🗑️ Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

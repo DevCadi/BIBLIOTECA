@@ -32,16 +32,22 @@
     </style>
 </head>
 <body class="bg-light">
+
+    <!-- Botones flotantes -->
     <a href="#" class="floating-btn left-btn" title="Sobre Biblioteca">
-        <img src="/static/info.png" alt="Info">
+        <img src="{{ url_for('static', filename='info.png') }}" alt="Info">
     </a>
     <a href="#" class="floating-btn right-btn" title="Contacto">
-        <img src="/static/contact.png" alt="Contacto">
+        <img src="{{ url_for('static', filename='contact.png') }}" alt="Contacto">
     </a>
+
+    <!-- Contenido -->
     <div class="container mt-5">
-        <div class="card mx-auto" style="max-width: 400px;">
+        <div class="card mx-auto shadow" style="max-width: 400px;">
             <div class="card-body">
-                <h3 class="card-title text-center">Iniciar Sesión</h3>
+                <h3 class="card-title text-center mb-4">Iniciar Sesión</h3>
+
+                <!-- Formulario -->
                 <form method="POST">
                     <div class="mb-3">
                         <input type="text" name="username" class="form-control" placeholder="Usuario" required>
@@ -51,16 +57,22 @@
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Ingresar</button>
                 </form>
+
+                <!-- Mensajes flash -->
                 {% with messages = get_flashed_messages() %}
                     {% if messages %}
-                        <div class="alert alert-danger mt-3">
-                            {% for msg in messages %}{{ msg }}<br>{% endfor %}
+                        <div class="alert alert-danger mt-3 mb-0">
+                            {% for msg in messages %}
+                                {{ msg }}<br>
+                            {% endfor %}
                         </div>
                     {% endif %}
                 {% endwith %}
             </div>
         </div>
     </div>
+
+    <!-- Footer -->
     <footer class="text-center mt-5 text-muted">
         <p>&copy; 2025 Biblioteca Virtual - Todos los derechos reservados</p>
     </footer>

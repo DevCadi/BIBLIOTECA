@@ -31,13 +31,20 @@ app.register_blueprint(reporte_controllers.reporte_bp)
 
 @app.route("/")
 def home():
+    from models.material_model import Material  # importa si no lo tienes arriba
+
     if 'usuario_tipo' in session:
-        if session['usuario_tipo'] == 'lector':
+        if session['usuario_tipo'].lower() == 'lector':
             materiales = Material.query.all()
             return render_template('home_lector.html', materiales=materiales)
         else:
             return render_template('dashboard.html')
-    return redirect(url_for('auth.login'))
+    
+    # visitante sin sesión
+    materiales = Material.query.all()
+    return render_template('home_lector.html', materiales=materiales)
+
+
 
 if __name__ == "__main__":
     with app.app_context():

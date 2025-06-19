@@ -1,40 +1,53 @@
 {% extends 'base.html' %}
 
-{%block title%} LIBROS {% endblock %}
+{% block title %} LIBROS {% endblock %}
 
 {% block content %}
-    <h1>Lista de Libros</h1>
-    <a href="{{ url_for('libro.create') }}" class="btn btn-primary mb-3">Agregar Nuevo Libro</a>
-    <table class="table table-bordered">
-        <thead class="table-dark">
-            <tr>
-                <th>ID</th>
-                <th>ISBN</th>
-                <th>Título</th>
-                <th>Editorial</th>
-                <th>Año Publicación</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for libro in libros %}
-            <tr>
-                <td>{{ libro.id_libro }}</td>
-                <td>{{ libro.isbn }}</td>
-                <td>{{ libro.material.titulo }}</td>
-                <td>{{ libro.id_editorial }}</td>
-                <td>{{ libro.anio_publicacion }}</td>
-                <td>
-                    <a href="{{ url_for('libro.edit', id_libro=libro.id_libro) }}" class="btn btn-sm btn-warning">Editar</a>
-                    <a href="{{ url_for('libro.delete', id_libro=libro.id_libro) }}" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar este libro?')">Eliminar</a>
-                </td>
-            </tr>
-            {% else %}
-            <tr>
-                <td colspan="5" class="text-center">No hay libros registrados.</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<h1>Lista de Libros</h1>
 
+<div class="d-flex justify-content-between mb-3">
+    <a href="{{ url_for('libro.create') }}" class="btn btn-success"> Agregar Nuevo Libro</a>
+
+    <div class="btn-group">
+        <button class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+             Generar Reporte
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{{ url_for('reporte.excel_libros') }}">Exportar a Excel</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('reporte.pdf_libros') }}">Exportar a PDF</a></li>
+        </ul>
+    </div>
+</div>
+
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>ISBN</th>
+            <th>Título</th>
+            <th>Editorial</th>
+            <th>Año Publicación</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for libro in libros %}
+        <tr>
+            <td>{{ libro.id_libro }}</td>
+            <td>{{ libro.isbn }}</td>
+            <td>{{ libro.material.titulo }}</td>
+            <td>{{ libro.editorial.nombre if libro.editorial else libro.id_editorial }}</td>
+            <td>{{ libro.anio_publicacion }}</td>
+            <td>
+                <a href="{{ url_for('libro.edit', id_libro=libro.id_libro) }}" class="btn btn-sm btn-warning">Editar</a>
+                <a href="{{ url_for('libro.delete', id_libro=libro.id_libro) }}" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar este libro?')">Eliminar</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="6" class="text-center">No hay libros registrados.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

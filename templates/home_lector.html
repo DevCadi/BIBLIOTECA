@@ -7,16 +7,27 @@
 </head>
 <body>
     <div class="container mt-4">
-        <h1 class="mb-4">Bienvenido {{ session.usuario_nombre }}</h1>
+        {% if 'usuario_nombre' in session %}
+            <h1 class="mb-4">Bienvenido {{ session.usuario_nombre }}</h1>
+        {% else %}
+            <h1 class="mb-4">Bienvenido visitante</h1>
+        {% endif %}
+
         <h4>Novedades disponibles:</h4>
         <ul class="list-group">
             {% for material in materiales %}
                 <li class="list-group-item">{{ material.titulo }} - {{ material.tipo }} ({{ material.estado }})</li>
             {% endfor %}
         </ul>
-        <a href="{{ url_for('auth.logout') }}" class="btn btn-danger mt-3">Cerrar sesión</a>
+
+        {% if 'usuario_tipo' in session %}
+            <a href="{{ url_for('auth.logout') }}" class="btn btn-danger mt-3">Cerrar sesión</a>
+        {% else %}
+            <a href="{{ url_for('usuario.login') }}" class="btn btn-primary mt-3">Iniciar sesión</a>
+        {% endif %}
     </div>
-        <footer class="text-center mt-5 text-muted">
+
+    <footer class="text-center mt-5 text-muted">
         <p>&copy; 2025 Biblioteca Virtual - Todos los derechos reservados</p>
     </footer>
 </body>

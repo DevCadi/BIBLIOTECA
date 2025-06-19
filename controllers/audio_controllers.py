@@ -15,7 +15,7 @@ def create():
     if request.method == 'POST':
         duracion = request.form['duracion']
         formato = request.form['formato']
-        propietario = request.form['duracion']
+        propietario = request.form['propietario']
     
         audio = Audio(duracion, formato, propietario)
         audio.save()
