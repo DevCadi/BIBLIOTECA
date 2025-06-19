@@ -6,6 +6,15 @@
 <h1>Actualización de proyectos</h1>
 <form action="{{url_for('proyecto.edit',id_pro=proyecto.id_pro)}}" method="POST">
     <div class="mb-3">
+        <label class="form-label">Titulo</label>
+        <select name="id_material" class="form-control" required>
+            <option value="">Seleccione un titulo:</option>
+            {% for material in materiales %}
+                <option value="{{material.id_material}}"  {% if proyecto.id_material== material.id_material %} selected {% endif %}>{{material.titulo}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
         <label for="" class="form-label">Autor</label>
         <input type="text" class="form-control" name="autor_est" value="{{proyecto.autor_est}}" required>
     </div>

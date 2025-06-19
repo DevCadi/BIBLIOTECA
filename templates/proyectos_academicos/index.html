@@ -10,6 +10,7 @@
 <table class="table table-striped">
     <tr>
         <th>ID</th>
+        <th>Título</th>
         <th>Autor</th>
         <th>Año de Defensa</th>
         <th></th>
@@ -18,6 +19,7 @@
     {% for item in proyectos %}
     <tr>
         <td>{{item.id_pro}}</td>
+        <td>{{item.material.titulo}}</td>
         <td>{{item.autor_est}}</td>
         <td>{{item.anio_defensa}}</td>
         <td>
