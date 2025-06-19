@@ -21,7 +21,7 @@
 
 <table class="table table-striped">
     <thead class="table-dark"> 
-        <tr>
+        <tr class="text-center">
             <th>ID</th>
             <th>Nombre</th>
             <th>Apellido</th>
@@ -29,7 +29,7 @@
             <th>Telefono</th>
             <th>Username</th>
             <th>Rol</th>
-            <th></th>
+            <th>Acciones</th>
             <th></th>
         </tr>
     </thead>
@@ -54,7 +54,12 @@
 
         </td>
     </tr>
+    {% else %}
+    <tr>
+            <td colspan="6" class="text-center">No hay Usuarios registrados.</td>
+    </tr>    
     {% endfor %}
+
 </table>
 
 

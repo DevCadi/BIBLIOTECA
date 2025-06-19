@@ -9,12 +9,12 @@
 
 <table class="table table-striped">
     <thead class="table-dark"> 
-        <tr>
+        <tr class="text-center">
             <th>ID</th>
             <th>Título</th>
             <th>Autor</th>
             <th>Año de Defensa</th>
-            <th></th>
+            <th>Acciones</th>
             <th></th>
         </tr>
     </thead>
@@ -36,7 +36,12 @@
 
         </td>
     </tr>
+    {% else %}
+    <tr>
+            <td colspan="6" class="text-center">No hay Proyectos Academicos registrados.</td>
+    </tr>    
     {% endfor %}
+
 </table>
 
 {% endblock %}

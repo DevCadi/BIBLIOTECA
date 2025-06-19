@@ -8,12 +8,12 @@
 
 <table class="table table-striped">
     <thead class="table-dark"> 
-        <tr>
+        <tr class="text-center">
             <th>ID</th>
             <th>Nombre</th>
             <th>Turno</th>
             <th>Fecha de contrato</th>
-            <th></th>
+            <th>Acciones</th>
             <th></th>
         </tr>
     </thead>
@@ -34,6 +34,11 @@
             </a>
         </td>
     </tr>
+    {% else %}
+    <tr>
+            <td colspan="6" class="text-center">No hay Bibliotecarios registrados.</td>
+    </tr>    
     {% endfor %}
+
 </table>
 {% endblock %}

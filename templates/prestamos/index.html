@@ -22,7 +22,7 @@
 
     <table class="table table-hover table-bordered">
         <thead class="table-dark">
-            <tr>
+            <tr class="text-center">
                 <th>ID</th>
                 <th>Usuario</th>
                 <th>Bibliotecario</th>
@@ -30,7 +30,7 @@
                 <th>F. Préstamo</th>
                 <th>F. Devolución</th>
                 <th>Estado</th>
-                <th class="text-center">Acciones</th>
+                <th >Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -38,7 +38,7 @@
             <tr>
                 <td>{{ p.id_prestamo }}</td>
                 <td>{{ (usuarios | selectattr("id", "equalto", p.id_usuario) | first).nombre }}</td>
-                <td>{{ (usuarios | selectattr("id", "equalto", p.id_bibliotecario) | first).nombre }}<td>
+                <td>{{ (usuarios | selectattr("id", "equalto", p.id_bibliotecario) | first).nombre }}</td>
                 <td>{{ p.material.titulo }}</td>
                 <td>{{ p.fecha_prestamo }}</td>
                 <td>{{ p.fecha_devolucion }}</td>
@@ -48,7 +48,13 @@
                     <a href="{{ url_for('prestamo.delete', id_prestamo=p.id_prestamo) }}" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar este préstamo?')">🗑️ Eliminar</a>
                 </td>
             </tr>
+            {% else %}
+            <tr>
+                 <td colspan="8" class="text-center">No hay Prestamos registrados.</td>
+            </tr>            
             {% endfor %}
+
+
         </tbody>
     </table>
 </div>
