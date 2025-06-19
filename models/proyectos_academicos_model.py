@@ -8,7 +8,10 @@ class Proyecto(db.Model):
     autor_est = db.Column(db.String(50), nullable=False)
     anio_defensa = db.Column(db.Integer, nullable=False)
 
-    def __init__(self, autor_est, anio_defensa):
+    material = db.relationship('Material', back_populates = 'proyecto_academico')
+
+    def __init__(self, id_material ,autor_est, anio_defensa):
+        self.id_material = id_material
         self.autor_est = autor_est
         self.anio_defensa = anio_defensa
 
@@ -27,8 +30,9 @@ class Proyecto(db.Model):
         return Proyecto.query.get(id_pro)
     
     #actualizar
-    def update(self, autor_est=None, anio_defensa=None):
-        if autor_est and anio_defensa:
+    def update(self, id_material=None ,autor_est=None, anio_defensa=None):
+        if autor_est and id_material and anio_defensa:
+            self.id_material = id_material
             self.autor_est = autor_est
             self.anio_defensa = anio_defensa
         db.session.commit()
