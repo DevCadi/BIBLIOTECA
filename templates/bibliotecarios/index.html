@@ -7,14 +7,16 @@
 <a href="{{ url_for('bibliotecario.create') }}" class="btn btn-success mb-3">➕ Nuevo Bibliotecario</a>
 
 <table class="table table-striped">
-    <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Turno</th>
-        <th>Fecha de contrato</th>
-        <th></th>
-        <th></th>
-    </tr>
+    <thead class="table-dark"> 
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Turno</th>
+            <th>Fecha de contrato</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
     {% for item in bibliotecarios %}
     <tr>
         <td>{{ item.id_biblio }}</td>

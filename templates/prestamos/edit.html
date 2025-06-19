@@ -29,6 +29,17 @@
     </div>
 
     <div class="mb-3">
+        <label>Material:</label>
+        <select name="id_material" class="form-control" required>
+            {% for m in materiales %}
+            <option value="{{ m.id }}" {% if m.id == prestamo.id_material %}selected{% endif %}>
+                {{ m.titulo }}
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="mb-3">
         <label>Fecha de Préstamo:</label>
         <input type="date" name="fecha_prestamo" class="form-control" value="{{ prestamo.fecha_prestamo }}" required>
     </div>

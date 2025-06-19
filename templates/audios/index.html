@@ -8,15 +8,18 @@
 <a href="{{url_for('audio.create')}}" class="btn btn-success mb-3">➕ Nuevo Audio</a>
 
 <table class="table table-striped">
-    <tr>
-        <th>ID</th>
-        <th>Título</th>
-        <th>Duracion</th>
-        <th>Formato</th>
-        <th>Propietario</th>
-        <th></th>
-        <th></th>
-    </tr>
+    <thead class="table-dark"> 
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Duracion</th>
+            <th>Formato</th>
+            <th>Propietario</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+ 
     {% for item in audios %}
     <tr>
         <td>{{item.material.titulo}}</td>

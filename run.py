@@ -97,6 +97,6 @@ def carrera():
 
 if __name__ == "__main__":
     with app.app_context():
-        crear_admin_inicial()
         db.create_all()
+        crear_admin_inicial()
     app.run(debug=True)
