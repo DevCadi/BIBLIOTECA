@@ -6,6 +6,15 @@
 <h1>Actualización de videos</h1>
 <form action="{{url_for('video.edit',id_video=video.id_video)}}" method="POST">
     <div class="mb-3">
+        <label class="form-label">Título</label>
+        <select name="id_material" class="form-control" required>
+            <option value="">Seleccione un título:</option>
+            {% for material in materiales %}
+                <option value="{{material.id_material}}"  {% if material.id_material== video.id_material %} selected {% endif %}>{{material.titulo}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
         <label for="" class="form-label">Duracion</label>
         <input type="text" class="form-control" name="duracion" value="{{video.duracion}}" required>
     </div>
