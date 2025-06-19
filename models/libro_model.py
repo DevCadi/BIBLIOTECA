@@ -44,3 +44,12 @@ class Libro(db.Model):
     @staticmethod
     def get_by_id(id_libro):
         return Libro.query.get(id_libro)
+
+    def to_dict(self):
+        return {
+            'id_libro': self.id_libro,
+            'isbn': self.isbn,
+            'id_material': self.id_material,
+            'id_editorial': self.id_editorial,
+            'anio_publicacion': self.anio_publicacion
+        }

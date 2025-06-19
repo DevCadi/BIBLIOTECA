@@ -1,11 +1,24 @@
 {% extends 'base.html' %}
 
-{%block title%} AUTORES {% endblock %}
+{% block title %} AUTORES {% endblock %}
 
 {% block content %}
 
 <h1>Lista de Autores</h1>
-<a href="{{url_for('autores.create')}}" class="btn btn-success mb-3">Nuevo Autor</a>
+
+<div class="d-flex justify-content-between mb-3">
+    <a href="{{ url_for('autores.create') }}" class="btn btn-success">Nuevo Autor</a>
+
+    <div class="btn-group">
+        <button class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Generar Reporte
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{{ url_for('reporte.excel_autores') }}">Exportar a Excel</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('reporte.pdf_autores') }}">Exportar a PDF</a></li>
+        </ul>
+    </div>
+</div>
 
 <table class="table table-striped">
     <tr>
@@ -16,13 +29,13 @@
     </tr>
     {% for item in autores %}
     <tr>
-        <td>{{item.id_autor}}</td>
-        <td>{{item.nombre}}</td>
+        <td>{{ item.id_autor }}</td>
+        <td>{{ item.nombre }}</td>
         <td>
-            <a href="{{url_for('autores.edit',id_autor=item.id_autor)}}" class="btn btn-warning">Editar</a>
+            <a href="{{ url_for('autores.edit', id_autor=item.id_autor) }}" class="btn btn-warning">Editar</a>
         </td>
         <td>
-            <a href="{{url_for('autores.delete',id_autor=item.id_autor)}}" class="btn btn-danger">Eliminar</a>
+            <a href="{{ url_for('autores.delete', id_autor=item.id_autor) }}" class="btn btn-danger">Eliminar</a>
         </td>
     </tr>
     {% endfor %}

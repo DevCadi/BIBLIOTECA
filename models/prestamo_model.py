@@ -40,3 +40,14 @@ class Prestamo(db.Model):
     @staticmethod
     def get_by_id(id_prestamo):
         return Prestamo.query.get(id_prestamo)
+    
+    def to_dict(self):
+        return {
+            'id_prestamo': self.id_prestamo,
+            'id_usuario': self.id_usuario,
+            'id_bibliotecario': self.id_bibliotecario,
+            'fecha_prestamo': str(self.fecha_prestamo),
+            'fecha_devolucion': str(self.fecha_devolucion),
+            'estado': self.estado
+        }
+

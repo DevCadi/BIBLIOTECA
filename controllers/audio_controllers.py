@@ -16,7 +16,7 @@ def create():
         id_material = request.form['id_material']
         duracion = request.form['duracion']
         formato = request.form['formato']
-        propietario = request.form['duracion']
+        propietario = request.form['propietario']
     
         audio = Audio(id_material, duracion, formato, propietario)
         audio.save()
