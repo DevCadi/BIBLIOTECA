@@ -14,6 +14,7 @@ class Material(db.Model):
     categoria = db.relationship('Categoria', back_populates='materiales')
     libro = db.relationship('Libro', back_populates='material')
     autor = db.relationship('Autores', back_populates='materiales')
+    audio = db.relationship('Audio', back_populates = 'material')
 
     def __init__(self, tipo, titulo, fecha_ingreso, estado, id_categoria, id_autor):
         self.tipo = tipo

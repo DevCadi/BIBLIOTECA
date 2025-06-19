@@ -6,6 +6,15 @@
 <h1>Registro de audios</h1>
 <form action="{{url_for('audio.create')}}" method="POST">
     <div class="mb-3">
+        <label>Titulo</label>
+        <select name="id_material" class="form-control" required>
+            <option value="">Seleccione un titulo:</option>
+            {% for material in materiales %}
+                <option value="{{material.id_material}}">{{material.titulo}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
         <label for="" class="form-label">Duracion</label>
         <input type="text" class="form-control" name="duracion" required>
     </div>

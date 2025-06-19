@@ -1,5 +1,5 @@
 from flask import request, redirect, url_for, Blueprint
-
+from models.material_model import Material
 from models.audio_model import Audio
 from views import audio_view
 
@@ -13,26 +13,31 @@ def index():
 @audio_bp.route("/create", methods = ['GET','POST'])
 def create():
     if request.method == 'POST':
+        id_material = request.form['id_material']
         duracion = request.form['duracion']
         formato = request.form['formato']
         propietario = request.form['propietario']
     
-        audio = Audio(duracion, formato, propietario)
+        audio = Audio(id_material, duracion, formato, propietario)
         audio.save()
         return redirect(url_for('audio.index'))
-    return audio_view.create()
+    materiales = Material.query.all()
+
+    return audio_view.create(materiales=materiales)
 
 @audio_bp.route("/edit/<int:id_audio>", methods=['GET','POST'])
 def edit(id_audio):
     audio = Audio.get_by_id(id_audio)
     if request.method == 'POST':
+        id_material = request.form['id_material']
         duracion = request.form['duracion']
         formato = request.form['formato']
         propietario = request.form['duracion']
 
-        audio.update(duracion=duracion, formato=formato, propietario=propietario)
+        audio.update(id_material=id_material, duracion=duracion, formato=formato, propietario=propietario)
         return redirect(url_for('audio.index'))
-    return audio_view.edit(audio)
+    materiales = Material.query.all()
+    return audio_view.edit(audio=audio, materiales=materiales)
 
 @audio_bp.route("/delete/<int:id_audio>")
 def delete(id_audio):
