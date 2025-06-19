@@ -14,149 +14,152 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     rel="stylesheet"
   />
-  <style>
-    body {
-      background-color: #0f1218;
-      color: #cfd8dc;
-      font-family: 'Fira Mono', monospace, monospace;
-    }
-    .navbar {
-      border-bottom: 2px solid #00ffea;
-      box-shadow: 0 0 10px #00ffea88;
-    }
-    .navbar-brand {
-      font-weight: 900;
-      font-size: 1.8rem;
-      letter-spacing: 0.2rem;
-      color: #00ffea !important;
-      text-transform: uppercase;
-    }
-    .nav-link {
-      font-weight: 600;
-      font-size: 1rem;
-      color: #a0f0e0 !important;
-      text-transform: uppercase;
-      transition: color 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-    .nav-link:hover, .nav-link.active {
-      color: #00ffea !important;
-      text-shadow: 0 0 8px #00ffea;
-    }
-    .nav-icon {
-      font-size: 1.1rem;
-    }
-    .btn-logout {
-      border: 2px solid #00ffea;
-      color: #00ffea;
-      font-weight: 700;
-      letter-spacing: 0.1rem;
-      text-transform: uppercase;
-      padding: 0.3rem 1rem;
-      transition: all 0.3s ease;
-      background: transparent;
-      border-radius: 0.3rem;
-      box-shadow: 0 0 6px #00ffea88;
-    }
-    .btn-logout:hover {
-      background: #00ffea;
-      color: #0f1218;
-      box-shadow: 0 0 12px #00ffea;
-    }
-    .navbar-collapse {
-      justify-content: space-between;
-      align-items: center;
-    }
-    /* Container tweaks */
-    .container {
-      margin-top: 2rem;
-    }
-  </style>
-</head>
-<body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
-    <a class="navbar-brand" href="#">BIBLIOTECA</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
+ <style>
+  body {
+    background-color: #0f1218;
+    color: #cfd8dc;
+    font-family: 'Fira Mono', monospace, monospace;
+  }
+  .navbar {
+    border-bottom: 2px solid #00ffea;
+    box-shadow: 0 0 10px #00ffea88;
+  }
+  .navbar-brand {
+    font-weight: 900;
+    font-size: 1.4rem; /* Más pequeño */
+    letter-spacing: 0.12rem; /* Más compacto */
+    color: #00ffea !important;
+    text-transform: uppercase;
+  }
+  .nav-link {
+    font-weight: 600;
+    font-size: 0.8rem; /* Reducido */
+    color: #a0f0e0 !important;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem; /* Menor gap entre icono y texto */
+    padding: 0.25rem 0.4rem; /* Más compacto vertical y horizontal */
+  }
+  .nav-link:hover,
+  .nav-link.active {
+    color: #00ffea !important;
+    text-shadow: 0 0 8px #00ffea;
+  }
+  .nav-icon {
+    font-size: 0.9rem; /* Más pequeño icono */
+  }
+  .btn-logout {
+    border: 2px solid #00ffea;
+    color: #00ffea;
+    font-weight: 700;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    padding: 0.25rem 0.8rem; /* Un poco más compacto */
+    transition: all 0.3s ease;
+    background: transparent;
+    border-radius: 0.3rem;
+    box-shadow: 0 0 6px #00ffea88;
+    font-size: 0.8rem;
+  }
+  .btn-logout:hover {
+    background: #00ffea;
+    color: #0f1218;
+    box-shadow: 0 0 12px #00ffea;
+  }
+  .navbar-collapse {
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Que pueda adaptarse en pantallas chicas */
+    gap: 0.3rem; /* Espacio entre grupos si hace wrap */
+  }
+  .container {
+    margin-top: 2rem;
+  }
+</style>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav gap-3">
-        <li class="nav-item">
-          <a class="nav-link" href="/categorias/"
-            ><i class="fas fa-tags nav-icon"></i> Categorías</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/libros/"
-            ><i class="fas fa-book nav-icon"></i> Libros</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/usuarios/"
-            ><i class="fas fa-users nav-icon"></i> Usuarios</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/bibliotecarios/"
-            ><i class="fas fa-user-tie nav-icon"></i> Bibliotecarios</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/editoriales/"
-            ><i class="fas fa-pen-nib nav-icon"></i> Editoriales</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/audios/"
-            ><i class="fas fa-headphones nav-icon"></i> Audios</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/materiales/"
-            ><i class="fas fa-cubes nav-icon"></i> Materiales</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/prestamos/"
-            ><i class="fas fa-hand-holding-medical nav-icon"></i> Préstamos</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/proyectos_academicos/"
-            ><i class="fas fa-flask nav-icon"></i> Proyectos Académicos</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/videos/"
-            ><i class="fas fa-video nav-icon"></i> Videos</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/autores/"
-            ><i class="fas fa-feather-alt nav-icon"></i> Autores</a
-          >
-        </li>
-      </ul>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+  <a class="navbar-brand" href="#">BIBLIOTECA</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#navbarNav"
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-      <!-- Botón cerrar sesión alineado a la derecha -->
-      <div class="d-flex">
-        <a href="{{ url_for('auth.logout') }}" class="btn btn-logout">
-          <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav gap-2">
+      <li class="nav-item">
+        <a class="nav-link" href="/categorias/">
+          <i class="fas fa-tags nav-icon"></i>Categorías
         </a>
-      </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/libros/">
+          <i class="fas fa-book nav-icon"></i>Libros
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/usuarios/">
+          <i class="fas fa-users nav-icon"></i>Usuarios
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/bibliotecarios/">
+          <i class="fas fa-user-tie nav-icon"></i>Bibliotecarios
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/editoriales/">
+          <i class="fas fa-pen-nib nav-icon"></i>Editoriales
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/audios/">
+          <i class="fas fa-headphones nav-icon"></i>Audios
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/materiales/">
+          <i class="fas fa-cubes nav-icon"></i>Materiales
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/prestamos/">
+          <i class="fas fa-hand-holding-medical nav-icon"></i>Préstamos
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/proyectos_academicos/">
+          <i class="fas fa-flask nav-icon"></i>Proyectos Académicos
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/videos/">
+          <i class="fas fa-video nav-icon"></i>Videos
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/autores/">
+          <i class="fas fa-feather-alt nav-icon"></i>Autores
+        </a>
+      </li>
+    </ul>
+
+    <div class="d-flex">
+      <a href="{{ url_for('auth.logout') }}" class="btn btn-logout">
+        <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+      </a>
     </div>
-  </nav>
+  </div>
+</nav>
+
 
   <div class="container">
     {% block content %}
