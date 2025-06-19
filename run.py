@@ -32,18 +32,24 @@ app.register_blueprint(reporte_controllers.reporte_bp)
 
 @app.route("/")
 def home():
-    from models.material_model import Material  # importa si no lo tienes arriba
+    from models.material_model import Material
+    tipo = request.args.get("tipo")
+    buscar = request.args.get("buscar")  # del buscador
 
-    if 'usuario_tipo' in session:
-        if session['usuario_tipo'].lower() == 'lector':
-            materiales = Material.query.all()
-            return render_template('home_lector.html', materiales=materiales)
-        else:
-            return render_template('dashboard.html')
-    
-    # visitante sin sesión
-    materiales = Material.query.all()
-    return render_template('home_lector.html', materiales=materiales)
+    query = Material.query
+
+    # Filtro por tipo
+    if tipo:
+        query = query.filter(Material.tipo.ilike(f"%{tipo}%"))
+
+    # Filtro por nombre del título
+    if buscar:
+        query = query.filter(Material.titulo.ilike(f"%{buscar}%"))
+
+    materiales = query.all()
+
+    return render_template("home_lector.html", materiales=materiales)
+
 
 def crear_admin_inicial():
     admin_existente = Usuario.query.filter_by(tipo="Admin").first()

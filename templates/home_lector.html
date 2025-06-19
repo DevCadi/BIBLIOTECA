@@ -123,9 +123,13 @@
       }
       .materiales-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
         gap: 1.5rem;
+        width: 100%;
       }
+
+
+
     </style>
 </head>
 <body>
@@ -143,71 +147,114 @@
     </div>
 
     <h1 class="mt-4">Bienvenido{% if 'usuario_nombre' in session %} {{ session.usuario_nombre }}{% else %} visitante{% endif %}</h1>
+    <!-- Sección Materiales -->
 
-    <h2 class="mt-5">Libros</h2>
+    <a href="{{ url_for('home') }}" class="btn btn-outline-light mb-3">Ver todos los materiales</a>
+
+    <!--BUSQUEDA-->
+    <form method="get" class="mb-4 d-flex" role="search">
+      {% if request.args.get('tipo') %}
+        <input type="hidden" name="tipo" value="{{ request.args.get('tipo') }}">
+      {% endif %}
+      <input type="text" name="buscar" class="form-control me-2" placeholder="Buscar por título..." value="{{ request.args.get('buscar', '') }}">
+      <button class="btn btn-primary" type="submit">Buscar</button>
+    </form>
+
+
+    <h2 class="mt-5">
+  <a href="{{ url_for('home', tipo='libro') }}" style="text-decoration: none; color: #00ffea;">
+    Libros
+  </a>
+</h2>
+
     <div class="materiales-grid">
-      {% for m in materiales if m.tipo == 'Libro' %}
-        <div class="material-card shadow">
-          <img src="{{ url_for('static', filename='pages.jpeg') }}" alt="{{ m.titulo }}" class="material-img" />
-          <div class="material-body">
-            <div>
-              <div class="material-title">{{ m.titulo }}</div>
-              <div class="material-author">Autor: {{ m.autor.nombre }}</div>
+      {% for m in materiales %}
+        {% if m.tipo.lower() == 'libro' %}
+          <div class="material-card shadow">
+            <img src="{{ url_for('static', filename='pages.jpeg') }}" alt="{{ m.titulo }}" class="material-img" />
+            <div class="material-body">
+              <div>
+                <div class="material-title">{{ m.titulo }}</div>
+                <div class="material-author">Autor: {{ m.autor.nombre }}</div>
+              </div>
+              <div class="material-status">{{ m.estado }}</div>
             </div>
-            <div class="material-status">{{ m.estado }}</div>
           </div>
-        </div>
+        {% endif %}
       {% endfor %}
     </div>
 
-    <h2 class="mt-5">Audios</h2>
+
+    <h2 class="mt-5">
+  <a href="{{ url_for('home', tipo='audio') }}" style="text-decoration: none; color: #00ffea;">
+    Audios
+  </a>
+</h2>
+
     <div class="materiales-grid">
-      {% for m in materiales if m.tipo == 'Audio' %}
-        <div class="material-card shadow">
-          <img src="{{ url_for('static', filename='audio.jpeg') }}" alt="{{ m.titulo }}" class="material-img" />
-          <div class="material-body">
-            <div>
-              <div class="material-title">{{ m.titulo }}</div>
-              <div class="material-author">Autor: {{ m.autor.nombre }}</div>
+      {% for m in materiales %}
+        {% if m.tipo.lower() == 'audio' %}
+          <div class="material-card shadow">
+            <img src="{{ url_for('static', filename='audio.jpeg') }}" alt="{{ m.titulo }}" class="material-img" />
+            <div class="material-body">
+              <div>
+                <div class="material-title">{{ m.titulo }}</div>
+                <div class="material-author">Autor: {{ m.autor.nombre }}</div>
+              </div>
+              <div class="material-status">{{ m.estado }}</div>
             </div>
-            <div class="material-status">{{ m.estado }}</div>
           </div>
-        </div>
+        {% endif %}
       {% endfor %}
     </div>
 
-    <h2 class="mt-5">Videos</h2>
+    <h2 class="mt-5">
+  <a href="{{ url_for('home', tipo='video') }}" style="text-decoration: none; color: #00ffea;">
+    Videos
+  </a>
+</h2>
+
     <div class="materiales-grid">
-      {% for m in materiales if m.tipo == 'Video' %}
-        <div class="material-card shadow">
-          <img src="{{ url_for('static', filename='video.jpeg') }}" alt="{{ m.titulo }}" class="material-img" />
-          <div class="material-body">
-            <div>
-              <div class="material-title">{{ m.titulo }}</div>
-              <div class="material-author">Autor: {{ m.autor.nombre }}</div>
+      {% for m in materiales %}
+        {% if m.tipo.lower() == 'video' %}
+          <div class="material-card shadow">
+            <img src="{{ url_for('static', filename='video.jpeg') }}" alt="{{ m.titulo }}" class="material-img" />
+            <div class="material-body">
+              <div>
+                <div class="material-title">{{ m.titulo }}</div>
+                <div class="material-author">Autor: {{ m.autor.nombre }}</div>
+              </div>
+              <div class="material-status">{{ m.estado }}</div>
             </div>
-            <div class="material-status">{{ m.estado }}</div>
           </div>
-        </div>
+        {% endif %}
       {% endfor %}
     </div>
 
-    <h2 class="mt-5">Proyectos Académicos</h2>
+
+        <!-- Sección Proyectos Académicos -->
+    <h2 class="mt-5">
+  <a href="{{ url_for('home', tipo='proyecto') }}" style="text-decoration: none; color: #00ffea;">
+    Proyectos Académicos
+  </a>
+</h2>
+
     <div class="materiales-grid">
-      {% for m in materiales if m.tipo == 'Proyecto Académico' %}
-        <div class="material-card shadow">
-          <img src="{{ url_for('static', filename='proyecto.jpeg') }}" alt="{{ m.titulo }}" class="material-img" />
-          <div class="material-body">
-            <div>
-              <div class="material-title">{{ m.titulo }}</div>
-              <div class="material-author">Autor: {{ m.autor.nombre }}</div>
+      {% for m in materiales %}
+        {% if 'proyecto' in m.tipo.lower() or 'tesis' in m.tipo.lower() %}
+          <div class="material-card shadow">
+            <img src="{{ url_for('static', filename='proyecto.jpeg') }}" alt="{{ m.titulo }}" class="material-img" />
+            <div class="material-body">
+              <div>
+                <div class="material-title">{{ m.titulo }}</div>
+                <div class="material-author">Autor: {{ m.autor.nombre }}</div>
+              </div>
+              <div class="material-status">{{ m.estado }}</div>
             </div>
-            <div class="material-status">{{ m.estado }}</div>
           </div>
-        </div>
+        {% endif %}
       {% endfor %}
     </div>
-  </div>
 
   <footer>
     <p>&copy; 2025 Biblioteca Virtual - Todos los derechos reservados</p>
