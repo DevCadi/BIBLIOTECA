@@ -4,6 +4,7 @@ class Proyecto(db.Model):
     __tablename__ = "proyecto_academico"
 
     id_pro = db.Column(db.Integer, primary_key=True)
+    id_material = db.Column(db.Integer, db.ForeignKey('materiales.id_material'), nullable=False)
     autor_est = db.Column(db.String(50), nullable=False)
     anio_defensa = db.Column(db.Integer, nullable=False)
 

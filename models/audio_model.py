@@ -4,6 +4,7 @@ class Audio(db.Model):
     __tablename__ = "audio"
 
     id_audio = db.Column(db.Integer, primary_key=True)
+    id_material = db.Column(db.Integer, db.ForeignKey('materiales.id_material'), nullable=False)
     duracion = db.Column(db.Float, nullable=False)
     formato = db.Column(db.String(50), nullable=False)
     propietario = db.Column(db.String(150), nullable=False)
