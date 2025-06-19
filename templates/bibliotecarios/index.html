@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 
-{%block title%} BIBLIOTECARIOS {% endblock %}
+{% block title %} BIBLIOTECARIOS {% endblock %}
 
 {% block content %}
-
 <h1>Lista de Bibliotecarios</h1>
-<a href="{{url_for('bibliotecario.create')}}" class="btn btn-success mb-3">➕ Nuevo Bibliotecario</a>
+<a href="{{ url_for('bibliotecario.create') }}" class="btn btn-success mb-3">➕ Nuevo Bibliotecario</a>
 
 <table class="table table-striped">
     <tr>
         <th>ID</th>
+        <th>Nombre</th>
         <th>Turno</th>
         <th>Fecha de contrato</th>
         <th></th>
@@ -17,22 +17,21 @@
     </tr>
     {% for item in bibliotecarios %}
     <tr>
-        <td>{{item.id_biblio}}</td>
-        <td>{{item.turno}}</td>
-        <td>{{item.fecha_contratacion}}</td>
+        <td>{{ item.id_biblio }}</td>
+        <td>{{ item.usuario.nombre }} {{ item.usuario.apellido }}</td>
+        <td>{{ item.turno }}</td>
+        <td>{{ item.fecha_contratacion }}</td>
         <td>
-            <a href="{{url_for('bibliotecario.edit',id_biblio=item.id_biblio)}}" class="btn btn-warning">Editar</a>
+            <a href="{{ url_for('bibliotecario.edit', id_biblio=item.id_biblio) }}" class="btn btn-warning">Editar</a>
         </td>
         <td>
             <a href="{{ url_for('bibliotecario.delete', id_biblio=item.id_biblio) }}"
-   class="btn btn-danger"
-   onclick="return confirm('¿Estás seguro de que deseas eliminar al bibliotecario con ID {{ item.id_biblio }}?');">
-   Eliminar
-</a>
-
+               class="btn btn-danger"
+               onclick="return confirm('¿Estás seguro de que deseas eliminar al bibliotecario con ID {{ item.id_biblio }}?');">
+               Eliminar
+            </a>
         </td>
     </tr>
     {% endfor %}
 </table>
-
 {% endblock %}

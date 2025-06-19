@@ -1,7 +1,8 @@
-from flask import request, redirect, url_for, Blueprint
+from flask import request, redirect, url_for, Blueprint, render_template,flash
 
 from models.bibliotecario_model import  Bibliotecario
 from views import bibliotecario_view
+from models.usuario_model import Usuario
 
 bibliotecario_bp = Blueprint('bibliotecario',__name__,url_prefix="/bibliotecarios")
 
@@ -10,16 +11,22 @@ def index():
     bibliotecario = Bibliotecario.get_all()
     return bibliotecario_view.list(bibliotecario)
 
-@bibliotecario_bp.route("/create", methods = ['GET','POST'])
+@bibliotecario_bp.route('/create', methods=['GET', 'POST'])
 def create():
     if request.method == 'POST':
         turno = request.form['turno']
         fecha_contratacion = request.form['fecha_contratacion']
-    
-        bibliotecario = Bibliotecario(turno, fecha_contratacion)
-        bibliotecario.save()
-        return redirect(url_for('bibliotecario.index'))
-    return bibliotecario_view.create()
+        id_usuario = request.form['id_usuario']
+
+        nuevo_biblio = Bibliotecario(turno, fecha_contratacion, id_usuario)
+        nuevo_biblio.save()
+        flash("Bibliotecario registrado exitosamente.")
+        return redirect(url_for('bibliotecarios.index'))
+
+    # Filtrar usuarios con tipo 'Bibliotecario'
+    usuarios_biblio = Usuario.query.filter_by(tipo='Bibliotecario').all()
+    return render_template('bibliotecarios/create.html', usuarios=usuarios_biblio)
+
 
 @bibliotecario_bp.route("/edit/<int:id_biblio>", methods=['GET','POST'])
 def edit(id_biblio):
