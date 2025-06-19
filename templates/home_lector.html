@@ -9,12 +9,32 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
     <style>
       body {
-        background-color: #0f1218;
-        font-family: 'Fira Mono', monospace;
-        color: #cfd8dc;
+        background: url('{{ url_for('static', filename='fondito.jpg') }}') no-repeat center center fixed;
+        background-size: cover;
+        position: relative;
         min-height: 100vh;
+        color: #cfd8dc;
+        font-family: 'Fira Mono', monospace;
         padding-bottom: 4rem;
       }
+
+      /* Capa oscura encima del fondo */
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-color: rgba(15, 18, 24, 0.75);
+        z-index: 0;
+      }
+
+      /* Contenedor principal para el contenido */
+      .container, 
+      .floating-logo, 
+      footer {
+        position: relative;
+        z-index: 1;
+      }
+
       h1, h2 {
         color: #00ffea;
         text-transform: uppercase;
