@@ -62,6 +62,10 @@ def crear_admin_inicial():
     else:
         print("Usuario Admin ya existe.")
 
+@app.route('/carrera')
+def carrera():
+    return render_template('carrera.html')
+
 if __name__ == "__main__":
     with app.app_context():
         crear_admin_inicial()

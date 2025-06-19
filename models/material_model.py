@@ -50,3 +50,15 @@ class Material(db.Model):
     @staticmethod
     def get_by_id(id_material):
         return Material.query.get(id_material)
+    
+    def to_dict(self):
+        return {
+            "id_material": self.id_material,
+            "tipo": self.tipo,
+            "titulo": self.titulo,
+            "fecha_ingreso": self.fecha_ingreso,
+            "estado": self.estado,
+            "categoria": self.categoria.nombre if self.categoria else "",
+            "autor": self.autor.nombre if self.autor else ""
+    }
+
