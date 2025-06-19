@@ -35,7 +35,8 @@
             <a href="{{ url_for('autores.edit', id_autor=item.id_autor) }}" class="btn btn-warning">Editar</a>
         </td>
         <td>
-            <a href="{{ url_for('autores.delete', id_autor=item.id_autor) }}" class="btn btn-danger">Eliminar</a>
+            <a href="{{ url_for('autores.delete', id_autor=item.id_autor) }}" class="btn btn-danger"
+   onclick="return confirm('¿Estás seguro de eliminar este autor?')">Eliminar</a>
             
         </td>
     </tr>

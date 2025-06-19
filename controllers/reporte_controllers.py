@@ -179,22 +179,27 @@ def pdf_libros():
     pdf.titulo = "Reporte de Libros"
     pdf.add_page()
     pdf.set_font("Arial", size=10)
+
+    # Cabecera
     pdf.cell(20, 10, "ID", 1)
     pdf.cell(30, 10, "ISBN", 1)
     pdf.cell(30, 10, "Material", 1)
     pdf.cell(40, 10, "Editorial", 1)
     pdf.cell(30, 10, "Año", 1)
     pdf.ln()
+
     for row in data:
         pdf.cell(20, 10, str(row['id_libro']), 1)
-        pdf.cell(30, 10, row['isbn'], 1)
-        pdf.cell(30, 10, str(row['id_material']), 1)
-        pdf.cell(40, 10, str(row['id_editorial']), 1)
-        pdf.cell(30, 10, row['anio_publicacion'], 1)
+        pdf.cell(30, 10, str(row['isbn']), 1)
+        pdf.cell(30, 10, row['material'], 1)      # Aquí usas el nombre en string
+        pdf.cell(40, 10, row['editorial'], 1)    # Aquí también nombre en string
+        pdf.cell(30, 10, str(row['anio_publicacion']), 1)
         pdf.ln()
+
     path = os.path.join(current_app.root_path, 'static', 'reporte_libros.pdf')
     pdf.output(path)
     return send_file(path, as_attachment=True)
+
 
 @reporte_bp.route("/pdf_materiales")
 def pdf_materiales():

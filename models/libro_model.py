@@ -49,7 +49,7 @@ class Libro(db.Model):
         return {
             'id_libro': self.id_libro,
             'isbn': self.isbn,
-            'id_material': self.id_material,
-            'id_editorial': self.id_editorial,
+            'material': self.material.titulo if self.material else 'N/A',
+            'editorial': self.editorial.nombre if self.editorial else 'N/A',
             'anio_publicacion': self.anio_publicacion
         }
