@@ -14,7 +14,8 @@
   />
   <style>
     body {
-      background-color: #0f1218;
+      background: url('{{ url_for("static", filename="fondo.jpg") }}') no-repeat center center fixed;
+      background-size: cover;
       font-family: 'Fira Mono', monospace, monospace;
       color: #cfd8dc;
       height: 100vh;
@@ -23,6 +24,7 @@
       justify-content: center;
       margin: 0;
     }
+
 
     .login-card {
       background: #1a1f2b;

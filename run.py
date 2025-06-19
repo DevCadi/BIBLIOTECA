@@ -30,25 +30,51 @@ app.register_blueprint(proyectos_academicos_controllers.proyecto_bp)
 app.register_blueprint(auth_controllers.auth_bp)
 app.register_blueprint(reporte_controllers.reporte_bp)
 
+from flask import render_template, request, session
+from models.material_model import Material
+
+from flask import render_template, request, session
+from models.material_model import Material
+from sqlalchemy import or_
+
 @app.route("/")
 def home():
-    from models.material_model import Material
     tipo = request.args.get("tipo")
-    buscar = request.args.get("buscar")  # del buscador
+    buscar = request.args.get("buscar")
 
     query = Material.query
 
-    # Filtro por tipo
+    # Filtro por tipo si se envió
     if tipo:
-        query = query.filter(Material.tipo.ilike(f"%{tipo}%"))
+        if tipo.lower() == 'proyecto':
+            # Mostrar materiales que tengan "proyecto" o "tesis" en el tipo
+            query = query.filter(
+                or_(
+                    Material.tipo.ilike('%proyecto%'),
+                    Material.tipo.ilike('%tesis%')
+                )
+            )
+        else:
+            query = query.filter(Material.tipo.ilike(f"%{tipo}%"))
 
-    # Filtro por nombre del título
+    # Filtro por búsqueda en el título si se envió
     if buscar:
         query = query.filter(Material.titulo.ilike(f"%{buscar}%"))
 
     materiales = query.all()
 
-    return render_template("home_lector.html", materiales=materiales)
+    # Si hay sesión y el usuario es lector, mostrar home_lector
+    if 'usuario_tipo' in session and session['usuario_tipo'].lower() == 'lector':
+        return render_template('home_lector.html', materiales=materiales)
+
+    # Si hay sesión pero no es lector, mostrar dashboard
+    elif 'usuario_tipo' in session:
+        return render_template('dashboard.html')
+
+    # Si no hay sesión, mostrar home_lector como visitante
+    return render_template('home_lector.html', materiales=materiales)
+
+
 
 
 def crear_admin_inicial():

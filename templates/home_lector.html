@@ -171,7 +171,7 @@
       {% for m in materiales %}
         {% if m.tipo.lower() == 'libro' %}
           <div class="material-card shadow">
-            <img src="{{ url_for('static', filename='pages.jpeg') }}" alt="{{ m.titulo }}" class="material-img" />
+            <img src="{{ url_for('static', filename='libro.png') }}" alt="{{ m.titulo }}" class="material-img" />
             <div class="material-body">
               <div>
                 <div class="material-title">{{ m.titulo }}</div>
@@ -195,7 +195,7 @@
       {% for m in materiales %}
         {% if m.tipo.lower() == 'audio' %}
           <div class="material-card shadow">
-            <img src="{{ url_for('static', filename='audio.jpeg') }}" alt="{{ m.titulo }}" class="material-img" />
+            <img src="{{ url_for('static', filename='audio.jpg') }}" alt="{{ m.titulo }}" class="material-img" />
             <div class="material-body">
               <div>
                 <div class="material-title">{{ m.titulo }}</div>
@@ -218,7 +218,7 @@
       {% for m in materiales %}
         {% if m.tipo.lower() == 'video' %}
           <div class="material-card shadow">
-            <img src="{{ url_for('static', filename='video.jpeg') }}" alt="{{ m.titulo }}" class="material-img" />
+            <img src="{{ url_for('static', filename='video.png') }}" alt="{{ m.titulo }}" class="material-img" />
             <div class="material-body">
               <div>
                 <div class="material-title">{{ m.titulo }}</div>
@@ -234,7 +234,7 @@
 
         <!-- Sección Proyectos Académicos -->
     <h2 class="mt-5">
-  <a href="{{ url_for('home', tipo='proyecto') }}" style="text-decoration: none; color: #00ffea;">
+  <a href="{{ url_for('home', tipo='proyecto' or 'Tesis') }}" style="text-decoration: none; color: #00ffea;">
     Proyectos Académicos
   </a>
 </h2>
@@ -243,7 +243,7 @@
       {% for m in materiales %}
         {% if 'proyecto' in m.tipo.lower() or 'tesis' in m.tipo.lower() %}
           <div class="material-card shadow">
-            <img src="{{ url_for('static', filename='proyecto.jpeg') }}" alt="{{ m.titulo }}" class="material-img" />
+            <img src="{{ url_for('static', filename='tesis.jpg') }}" alt="{{ m.titulo }}" class="material-img" />
             <div class="material-body">
               <div>
                 <div class="material-title">{{ m.titulo }}</div>

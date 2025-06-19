@@ -128,6 +128,14 @@
     </div>
   </nav>
 
+  {% if session.get('usuario_nombre') %}
+  <div class="text-center mt-4">
+    <h2 style="color: #00ffea; text-shadow: 0 0 6px #00ffea; font-size: 6rem" >
+      Bienvenido, {{ session['usuario_nombre'] }}
+    </h2>
+  </div>
+  {% endif %}
+
   <div class="container">
     {% block content %}{% endblock %}
   </div>
