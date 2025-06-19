@@ -9,7 +9,10 @@ class Video(db.Model):
     formato = db.Column(db.String(50), nullable=False)
     director = db.Column(db.String(150), nullable=False)
 
-    def __init__(self, duracion, formato, director):
+    material = db.relationship('Material', back_populates='video')
+
+    def __init__(self, id_material,duracion, formato, director):
+        self.id_material = id_material
         self.duracion = duracion
         self.formato = formato
         self.director = director
@@ -29,8 +32,9 @@ class Video(db.Model):
         return Video.query.get(id_video)
     
     #actualizar
-    def update(self, duracion=None, formato=None, director=None):
-        if duracion and formato and director:
+    def update(self, id_material=None ,duracion=None, formato=None, director=None):
+        if id_material and duracion and formato and director:
+            self.id_material = id_material
             self.duracion = duracion
             self.formato = formato
             self.director = director

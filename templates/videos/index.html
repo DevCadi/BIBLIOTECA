@@ -10,6 +10,7 @@
 <table class="table table-striped">
     <tr>
         <th>ID</th>
+        <th>Título</th>
         <th>Duracion</th>
         <th>Formato</th>
         <th>Director</th>
@@ -19,6 +20,7 @@
     {% for item in videos %}
     <tr>
         <td>{{item.id_video}}</td>
+        <td>{{item.material.titulo}}</td>
         <td>{{item.duracion}}</td>
         <td>{{item.formato}}</td>
         <td>{{item.director}}</td>
