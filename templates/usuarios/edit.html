@@ -33,9 +33,9 @@
     <div class="mb-3">
         <label for="" class="form-label">Rol</label>
         <select name="tipo" class="form-select" required>
-            <option value="admin" {%if usuario.rol == 'admin'%}selected{%endif%}>Admin</option>
-            <option value="bibliotecario" {%if usuario.rol == 'bibliotecario'%}selected{%endif%}>Bibliotecario</option>
-            <option value="Lector" {%if usuario.rol == 'lector'%}selected{%endif%}>Lector</option>
+            <option value="Admin" {%if usuario.rol == 'Admin'%}selected{%endif%}>Admin</option>
+            <option value="Bibliotecario" {%if usuario.rol == 'Bibliotecario'%}selected{%endif%}>Bibliotecario</option>
+            <option value="Lector" {%if usuario.rol == 'Lector'%}selected{%endif%}>Lector</option>
         </select>
     </div>
     <button type="submit" class="btn btn-primary">Registrar usuario</button>
