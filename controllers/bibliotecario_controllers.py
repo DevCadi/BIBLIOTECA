@@ -21,7 +21,7 @@ def create():
         nuevo_biblio = Bibliotecario(turno, fecha_contratacion, id_usuario)
         nuevo_biblio.save()
         flash("Bibliotecario registrado exitosamente.")
-        return redirect(url_for('bibliotecarios.index'))
+        return redirect(url_for('bibliotecario.index'))
 
     # Filtrar usuarios con tipo 'Bibliotecario'
     usuarios_biblio = Usuario.query.filter_by(tipo='Bibliotecario').all()

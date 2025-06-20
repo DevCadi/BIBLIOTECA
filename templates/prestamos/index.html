@@ -39,13 +39,13 @@
                 <td>{{ p.id_prestamo }}</td>
                 <td>{{ (usuarios | selectattr("id", "equalto", p.id_usuario) | first).nombre }}</td>
                 <td>{{ (usuarios | selectattr("id", "equalto", p.id_bibliotecario) | first).nombre }}</td>
-                <td>{{ p.material.titulo }}</td>
+                <td>{{ (materiales | selectattr("id_material", "equalto", p.id_material) | first).titulo if (materiales | selectattr("id_material", "equalto", p.id_material) | first) else "No encontrado" }}</td>
                 <td>{{ p.fecha_prestamo }}</td>
                 <td>{{ p.fecha_devolucion }}</td>
                 <td>{{ p.estado }}</td>
                 <td class="text-center">
-                    <a href="{{ url_for('prestamo.edit', id_prestamo=p.id_prestamo) }}" class="btn btn-sm btn-warning">✏️ Editar</a>
-                    <a href="{{ url_for('prestamo.delete', id_prestamo=p.id_prestamo) }}" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar este préstamo?')">🗑️ Eliminar</a>
+                    <a href="{{ url_for('prestamo.edit', id_prestamo=p.id_prestamo) }}" class="btn btn-sm btn-warning">Editar</a>
+                    <a href="{{ url_for('prestamo.delete', id_prestamo=p.id_prestamo) }}" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar este préstamo?')">Eliminar</a>
                 </td>
             </tr>
             {% else %}
@@ -54,8 +54,8 @@
             </tr>            
             {% endfor %}
 
-
         </tbody>
+        
     </table>
 </div>
 {% endblock %}

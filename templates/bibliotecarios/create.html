@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %} BIBLIOTECARIOS | CREATE {% endblock %}
+{% block title %} BIBLIOTECARIOS {% endblock %}
 
 {% block content %}
-<h1>Registro de bibliotecarios</h1>
+<h1>Registro de Bibliotecarios</h1>
+
 <form action="{{ url_for('bibliotecario.create') }}" method="POST">
     <div class="mb-3">
         <label for="id_usuario" class="form-label">Nombre del Usuario</label>
@@ -14,14 +15,18 @@
             {% endfor %}
         </select>
     </div>
+
     <div class="mb-3">
         <label for="turno" class="form-label">Turno</label>
         <input type="text" class="form-control" name="turno" required>
     </div>
+
     <div class="mb-3">
-        <label for="fecha_contratacion" class="form-label">Fecha de contratación</label>
+        <label for="fecha_contratacion" class="form-label">Fecha de Contratación</label>
         <input type="date" class="form-control" name="fecha_contratacion" required>
     </div>
-    <button type="submit" class="btn btn-primary">Registrar bibliotecario</button>
+
+    <button type="submit" class="btn btn-primary">Registrar Bibliotecario</button>
+    <a href="{{ url_for('bibliotecario.index') }}" class="btn btn-secondary">Cancelar</a>
 </form>
 {% endblock %}

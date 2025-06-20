@@ -32,7 +32,7 @@
         <label>Material:</label>
         <select name="id_material" class="form-control" required>
             {% for m in materiales %}
-            <option value="{{ m.id }}" {% if m.id == prestamo.id_material %}selected{% endif %}>
+            <option value="{{ m.id_material }}" {% if m.id == prestamo.id_material %}selected{% endif %}>
                 {{ m.titulo }}
             </option>
             {% endfor %}

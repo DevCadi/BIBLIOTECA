@@ -152,21 +152,29 @@ def pdf_autores():
 def pdf_prestamos():
     prestamos = Prestamo.get_all()
     data = [p.to_dict() for p in prestamos]
+
     pdf = PDF()
     pdf.titulo = "Reporte de Préstamos"
     pdf.add_page()
     pdf.set_font("Arial", size=10)
+
+    # Cabeceras
     pdf.cell(20, 10, "ID", 1)
     pdf.cell(40, 10, "Usuario", 1)
     pdf.cell(50, 10, "Material", 1)
-    pdf.cell(40, 10, "Fecha", 1)
+    pdf.cell(40, 10, "Fecha Préstamo", 1)
     pdf.ln()
+
+    # Contenido
     for row in data:
         pdf.cell(20, 10, str(row['id_prestamo']), 1)
-        pdf.cell(40, 10, str(row['usuario']), 1)
-        pdf.cell(50, 10, str(row['material']), 1)
-        pdf.cell(40, 10, str(row['fecha']), 1)
+        pdf.cell(40, 10, row['usuario'], 1)
+        pdf.cell(50, 10, row['material'], 1)
+        pdf.cell(40, 10, row['fecha_prestamo'], 1)  # Aquí usas la clave correcta
         pdf.ln()
+
+
+    # Guardar y enviar el archivo
     path = os.path.join(current_app.root_path, 'static', 'reporte_prestamos.pdf')
     pdf.output(path)
     return send_file(path, as_attachment=True)

@@ -29,9 +29,10 @@ class Prestamo(db.Model):
         db.session.add(self)
         db.session.commit()
 
-    def update(self, id_usuario=None, id_bibliotecario=None, fecha_prestamo=None, fecha_devolucion=None, estado=None):
+    def update(self, id_usuario=None, id_bibliotecario=None, id_material=None, fecha_prestamo=None, fecha_devolucion=None, estado=None):
         if id_usuario: self.id_usuario = id_usuario
         if id_bibliotecario: self.id_bibliotecario = id_bibliotecario
+        if id_material: self.id_material = id_material
         if fecha_prestamo: self.fecha_prestamo = fecha_prestamo
         if fecha_devolucion: self.fecha_devolucion = fecha_devolucion
         if estado: self.estado = estado
@@ -52,10 +53,12 @@ class Prestamo(db.Model):
     def to_dict(self):
         return {
             'id_prestamo': self.id_prestamo,
-            'id_usuario': self.id_usuario,
-            'id_bibliotecario': self.id_bibliotecario,
+            'usuario': self.usuario.nombre if self.usuario else "Desconocido",
+            'bibliotecario': self.bibliotecario.nombre if self.bibliotecario else "Desconocido",
+            'material': self.material.titulo if self.material else "Desconocido",
             'fecha_prestamo': str(self.fecha_prestamo),
             'fecha_devolucion': str(self.fecha_devolucion),
             'estado': self.estado
         }
+
 
