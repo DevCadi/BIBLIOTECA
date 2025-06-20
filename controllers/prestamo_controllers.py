@@ -3,6 +3,8 @@ from datetime import datetime
 from models.prestamo_model import Prestamo
 from models.usuario_model import Usuario
 from views import prestamo_view
+from models.material_model import Material
+
 
 prestamo_bp = Blueprint('prestamo', __name__, url_prefix="/prestamos")
 
@@ -15,17 +17,28 @@ def index():
 @prestamo_bp.route("/create", methods=['GET', 'POST'])
 def create():
     usuarios = Usuario.get_all()
+    materiales = Material.query.all()  
+
     if request.method == 'POST':
         id_usuario = request.form['id_usuario']
         id_bibliotecario = request.form['id_bibliotecario']
+        id_material = request.form['id_material']  
         fecha_prestamo = datetime.strptime(request.form['fecha_prestamo'], "%Y-%m-%d").date()
         fecha_devolucion = datetime.strptime(request.form['fecha_devolucion'], "%Y-%m-%d").date()
         estado = request.form['estado']
 
-        prestamo = Prestamo(id_usuario, id_bibliotecario, fecha_prestamo, fecha_devolucion, estado)
+        prestamo = Prestamo(
+            id_usuario=id_usuario,
+            id_bibliotecario=id_bibliotecario,
+            id_material=id_material,  
+            fecha_prestamo=fecha_prestamo,
+            fecha_devolucion=fecha_devolucion,
+            estado=estado
+        )
         prestamo.save()
         return redirect(url_for('prestamo.index'))
-    return prestamo_view.create(usuarios)
+    return prestamo_view.create(usuarios, materiales)
+
 
 @prestamo_bp.route("/edit/<int:id_prestamo>", methods=['GET', 'POST'])
 def edit(id_prestamo):

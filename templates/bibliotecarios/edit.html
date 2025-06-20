@@ -3,17 +3,20 @@
 {% block title %} BIBLIOTECARIOS | EDIT {% endblock %}
 
 {% block content %}
-<h1>Actualización de bibliotecarios</h1>
-<form action="{{url_for('bibliotecario.edit',id_biblio=bibliotecario.id_biblio)}}" method="POST">
+<h1>Actualización de bibliotecario</h1>
+<form action="{{ url_for('bibliotecario.edit', id_biblio=bibliotecario.id_biblio) }}" method="POST">
     <div class="mb-3">
-        <label for="" class="form-label">Turno</label>
-        <input type="text" class="form-control" name="turno" value="{{bibliotecario.turno}}" required>
+        <label class="form-label">Nombre del Bibliotecario</label>
+        <input type="text" class="form-control" value="{{ bibliotecario.usuario.nombre }} {{ bibliotecario.usuario.apellido }}" readonly>
     </div>
     <div class="mb-3">
-        <label for="" class="form-label">Fecha de contratación</label>
-        <input type="date" class="form-control" name="fecha_contratacion" value="{{bibliotecario.fecha_contratacion}}" required>
+        <label class="form-label">Turno</label>
+        <input type="text" class="form-control" name="turno" value="{{ bibliotecario.turno }}" required>
+    </div>  
+    <div class="mb-3">
+        <label class="form-label">Fecha de contratación</label>
+        <input type="date" class="form-control" name="fecha_contratacion" value="{{ bibliotecario.fecha_contratacion }}" required>
     </div>
-    <button type="submit" class="btn btn-primary">Actualizar bibliotecarios</button>
+    <button type="submit" class="btn btn-primary">Actualizar bibliotecario</button>
 </form>
-
 {% endblock %}

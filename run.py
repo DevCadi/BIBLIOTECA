@@ -74,9 +74,6 @@ def home():
     # Si no hay sesión, mostrar home_lector como visitante
     return render_template('home_lector.html', materiales=materiales)
 
-
-
-
 def crear_admin_inicial():
     admin_existente = Usuario.query.filter_by(tipo="Admin").first()
     if not admin_existente:
@@ -100,6 +97,6 @@ def carrera():
 
 if __name__ == "__main__":
     with app.app_context():
-        crear_admin_inicial()
         db.create_all()
+        crear_admin_inicial()
     app.run(debug=True)

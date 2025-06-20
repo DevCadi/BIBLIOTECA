@@ -4,17 +4,24 @@
 
 {% block content %}
 <h1>Registro de bibliotecarios</h1>
-<form action="{{url_for('bibliotecario.create')}}" method="POST">
+<form action="{{ url_for('bibliotecario.create') }}" method="POST">
     <div class="mb-3">
-        <label for="" class="form-label">Turno</label>
+        <label for="id_usuario" class="form-label">Nombre del Usuario</label>
+        <select class="form-control" name="id_usuario" required>
+            <option value="">Seleccione un usuario</option>
+            {% for usuario in usuarios %}
+                <option value="{{ usuario.id }}">{{ usuario.nombre }} {{ usuario.apellido }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="turno" class="form-label">Turno</label>
         <input type="text" class="form-control" name="turno" required>
     </div>
     <div class="mb-3">
-        <label for="" class="form-label">Fecha de contratación</label>
+        <label for="fecha_contratacion" class="form-label">Fecha de contratación</label>
         <input type="date" class="form-control" name="fecha_contratacion" required>
     </div>
     <button type="submit" class="btn btn-primary">Registrar bibliotecario</button>
 </form>
-
-
 {% endblock %}

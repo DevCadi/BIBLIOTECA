@@ -10,15 +10,14 @@
     <style>
       /* Estilos personalizados */
       body {
-        background: url('{{ url_for('static', filename='fondito.jpg') }}') no-repeat center center fixed;
-        background-size: cover;
-        position: relative;
-        min-height: 100vh;
-        color: #cfd8dc;
-        font-family: 'Fira Mono', monospace;
-        padding-bottom: 4rem;
+          background: url("{{ url_for('static', filename='fondito.jpg') }}") no-repeat center center fixed;
+          background-size: cover;
+          position: relative;
+          min-height: 100vh;
+          color: #cfd8dc;
+          font-family: 'Fira Mono', monospace;
+          padding-bottom: 4rem;
       }
-
       /* Capa oscura encima del fondo */
       body::before {
         content: "";

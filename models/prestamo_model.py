@@ -4,18 +4,26 @@ class Prestamo(db.Model):
     __tablename__ = 'prestamos'
 
     id_prestamo = db.Column(db.Integer, primary_key=True)
-    id_usuario = db.Column(db.Integer, nullable=False)
-    id_bibliotecario = db.Column(db.Integer, nullable=False)
-    fecha_prestamo = db.Column(db.Date, nullable=False)
-    fecha_devolucion = db.Column(db.Date, nullable=False)
+    id_usuario = db.Column(db.Integer, db.ForeignKey('usuarios.id'), nullable=False)
+    id_bibliotecario = db.Column(db.Integer, db.ForeignKey('bibliotecario.id_biblio'), nullable=False)
+    id_material = db.Column(db.Integer, db.ForeignKey('materiales.id_material'), nullable=False)  
+    fecha_prestamo = db.Column(db.String(50), nullable=False)
+    fecha_devolucion = db.Column(db.String(50), nullable=False)
     estado = db.Column(db.String(20), nullable=False)
 
-    def __init__(self, id_usuario, id_bibliotecario, fecha_prestamo, fecha_devolucion, estado):
+    # Relaciones
+    usuario = db.relationship("Usuario", backref="prestamos")
+    bibliotecario = db.relationship("Bibliotecario", backref="prestamos")
+    material = db.relationship("Material", backref="prestamos")  
+
+    def __init__(self, id_usuario, id_bibliotecario, id_material, fecha_prestamo, fecha_devolucion, estado):
         self.id_usuario = id_usuario
         self.id_bibliotecario = id_bibliotecario
+        self.id_material = id_material
         self.fecha_prestamo = fecha_prestamo
         self.fecha_devolucion = fecha_devolucion
         self.estado = estado
+
 
     def save(self):
         db.session.add(self)

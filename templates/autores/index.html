@@ -21,12 +21,14 @@
 </div>
 
 <table class="table table-striped">
-    <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th></th>
-        <th></th>
-    </tr>
+    <thead class="table-dark"> 
+        <tr class="text-center">
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Acciones</th>
+            <th></th>
+        </tr>
+    </thead>
     {% for item in autores %}
     <tr>
         <td>{{ item.id_autor }}</td>
@@ -40,7 +42,12 @@
             
         </td>
     </tr>
+    {% else %}
+    <tr>
+            <td colspan="6" class="text-center">No hay Autorees registrados.</td>
+    </tr>    
     {% endfor %}
+
 </table>
 
 {% endblock %}
