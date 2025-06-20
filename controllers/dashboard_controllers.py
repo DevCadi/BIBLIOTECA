@@ -9,8 +9,8 @@ dashboard_bp = Blueprint('dashboard', __name__)
 
 @dashboard_bp.route('/')
 def index():
-    total_lectores = Usuario.query.filter_by(tipo='Lector').count()
-    total_prestamos = Prestamo.query.count()
+    total_lectores = Usuario.query.filter_by(tipo='Lector').count() or 0
+    total_prestamos = Prestamo.query.count() or 0
 
     ranking_materiales = (
         db.session.query(Material.titulo, func.count(Prestamo.id_material))
@@ -22,7 +22,7 @@ def index():
     )
 
     return render_template('dashboard.html',
-        total_lectores=total_lectores,
-        total_prestamos=total_prestamos,
+        total_lectores=int(total_lectores),
+        total_prestamos=int(total_prestamos),
         ranking_materiales=ranking_materiales
     )
