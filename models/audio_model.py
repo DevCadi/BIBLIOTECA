@@ -7,15 +7,13 @@ class Audio(db.Model):
     id_material = db.Column(db.Integer, db.ForeignKey('materiales.id_material'), nullable=False)
     duracion = db.Column(db.Float, nullable=False)
     formato = db.Column(db.String(50), nullable=False)
-    propietario = db.Column(db.String(150), nullable=False)
 
     material = db.relationship('Material', back_populates = 'audio')
 
-    def __init__(self, id_material ,duracion, formato, propietario):
+    def __init__(self, id_material ,duracion, formato):
         self.id_material = id_material
         self.duracion = duracion
         self.formato = formato
-        self.propietario = propietario
 
     def save(self):
         db.session.add(self)
@@ -32,12 +30,11 @@ class Audio(db.Model):
         return Audio.query.get(id_audio)
     
     #actualizar
-    def update(self, id_material=None, duracion=None, formato=None, propietario=None):
-        if id_material and duracion and formato and propietario:
+    def update(self, id_material=None, duracion=None, formato=None):
+        if id_material and duracion and formato:
             self.id_material= id_material
             self.duracion = duracion
             self.formato = formato
-            self.propietario = propietario
         db.session.commit()
 
     #eliminar

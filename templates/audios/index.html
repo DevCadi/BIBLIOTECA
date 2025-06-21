@@ -14,7 +14,6 @@
             <th>Título</th>
             <th>Duracion</th>
             <th>Formato</th>
-            <th>Propietario</th>
             <th>Acciones</th> 
             <th></th>
         </tr>
@@ -26,7 +25,6 @@
         <td>{{item.id_audio}}</td>
         <td>{{item.duracion}}</td>
         <td>{{item.formato}}</td>
-        <td>{{item.propietario}}</td>
         <td>
             <a href="{{url_for('audio.edit',id_audio=item.id_audio)}}" class="btn btn-warning">Editar</a>
         </td>
