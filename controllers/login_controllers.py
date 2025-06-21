@@ -10,10 +10,11 @@ def login():
         password = request.form['password']
         user = Usuario.query.filter_by(username=username).first()
         if user and user.verify_password(password):
-            session['user_id'] = user.id
-            session['user_tipo'] = user.tipo
+            session['usuario_id'] = user.id
+            session['usuario_tipo'] = user.tipo
+            session['usuario_nombre'] = user.nombre
             flash('Bienvenido, ' + user.nombre)
-            return redirect(url_for('home'))
+            return redirect(url_for('home'))  # Esto va a / y lo maneja bien el run.py
         else:
             flash('Credenciales incorrectas')
     return render_template('login.html')
