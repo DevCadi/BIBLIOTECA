@@ -1,18 +1,10 @@
+# controllers/dashboard_controllers.py
 from flask import Blueprint, render_template
 from models.usuario_model import Usuario
 from models.prestamo_model import Prestamo
 from models.material_model import Material
 from sqlalchemy import func
 from database import db
-
-dashboard_bp = Blueprint('dashboard', __name__)
-
-from flask import Blueprint, render_template
-from models.usuario_model import Usuario
-from models.prestamo_model import Prestamo
-from models.material_model import Material
-from database import db
-from sqlalchemy import func
 
 dashboard_bp = Blueprint('dashboard', __name__)
 
@@ -30,9 +22,9 @@ def index():
         .all()
     )
 
-
-    return render_template('dashboard.html',
-        total_lectores=int(total_lectores),
-        total_prestamos=int(total_prestamos),
+    return render_template(
+        'dashboard.html',
+        total_lectores=total_lectores,
+        total_prestamos=total_prestamos,
         ranking_materiales=ranking_materiales
     )

@@ -440,6 +440,31 @@
     }
   }
 
+  .footer-interactive {
+    background: linear-gradient(135deg, #1a1f2b 0%, #0f1218 100%);
+    padding: 3rem 0 1rem;
+    border-top: 1px solid #00ffea55;
+    box-shadow: 0 -5px 30px #00ffea22;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .footer-interactive::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00ffea, transparent);
+    animation: scanline 4s linear infinite;
+  }
+  
+  @keyframes scanline {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(calc(100vh + 100px)); }
+  }
+  
     </style>
 </head>
 <body>

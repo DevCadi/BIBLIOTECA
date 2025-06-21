@@ -82,31 +82,7 @@
       max-width: 1200px;
       flex: 1;
     }
-    .footer-interactive {
-    background: linear-gradient(135deg, #1a1f2b 0%, #0f1218 100%);
-    padding: 3rem 0 1rem;
-    border-top: 1px solid #00ffea55;
-    box-shadow: 0 -5px 30px #00ffea22;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .footer-interactive::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #00ffea, transparent);
-    animation: scanline 4s linear infinite;
-  }
-  
-  @keyframes scanline {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(calc(100vh + 100px)); }
-  }
-  
+    
   
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -193,6 +169,7 @@
             elemento.textContent = Math.floor(contador).toLocaleString();
         }, 10);
     }
+    
     const totalLectores = parseInt("{{ total_lectores }}") || 0;
     const totalPrestamos = parseInt("{{ total_prestamos }}") || 0;
 
@@ -200,37 +177,46 @@
         animarContador('contador-lectores', totalLectores);
         animarContador('contador-prestamos', totalPrestamos);
     };
+
+
 </script>
 
-    <h3 class="text-info mt-5">📚 Materiales más prestados</h3>
-    <table class="table table-dark table-bordered mt-3">
-      <thead>
-        <tr>
-          <th>Título</th>
-          <th>Veces Prestado</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for titulo, total in ranking_materiales %}
-        <tr>
-          <td>{{ titulo }}</td>
-          <td>{{ total }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+<h3 class="text-info mt-5">📚 Materiales más prestados</h3>
+<table class="table table-dark table-bordered mt-3">
+  <thead>
+    <tr>
+      <th>Título</th>
+      <th>Veces Prestado</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for titulo, total in ranking_materiales %}
+      <tr>
+        <td>{{ titulo }}</td>
+        <td>{{ total }}</td>
+      </tr>
+    {% else %}
+      <tr>
+        <td colspan="2" class="text-center">No hay materiales prestados aún.</td>
+      </tr>
+   
+    {% endfor %}
+
+  </tbody>
+
+</table>
+
   </div>
-  {% endif %}
+    {% endif %}
 
   <footer>
     <p align="center">&copy; 2025 Biblioteca Virtual - Todos los derechos reservados</p>
   </footer>
   
-</body>
-
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/bootstrap.bundle.min.js"
     integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
     crossorigin="anonymous"
   > </script>
+</body>
 </html>

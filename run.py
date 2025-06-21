@@ -4,12 +4,12 @@ from models.material_model import Material
 from models.usuario_model import Usuario
 from database import db
 
-from controllers.dashboard_controllers import dashboard_bp
+
 from controllers import (
     categoria_controllers, autores_controllers, usuario_controllers, audio_controllers,
     bibliotecario_controllers, editorial_controllers, video_controllers, libro_controllers,
     material_controllers, prestamo_controllers, proyectos_academicos_controllers,
-    auth_controllers, reporte_controllers
+    auth_controllers, reporte_controllers,dashboard_controllers
 )
 
 app = Flask(__name__)
@@ -20,20 +20,21 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)
 
 # Registrar blueprints
-app.register_blueprint(audio_controllers.audio_bp)
-app.register_blueprint(usuario_controllers.usuario_bp)
-app.register_blueprint(bibliotecario_controllers.bibliotecario_bp)
-app.register_blueprint(categoria_controllers.categoria_bp)
-app.register_blueprint(autores_controllers.autor_bp)
-app.register_blueprint(editorial_controllers.editorial_bp)
-app.register_blueprint(video_controllers.video_bp)
-app.register_blueprint(libro_controllers.libro_bp)
-app.register_blueprint(material_controllers.material_bp)
-app.register_blueprint(prestamo_controllers.prestamo_bp)
-app.register_blueprint(proyectos_academicos_controllers.proyecto_bp)
-app.register_blueprint(auth_controllers.auth_bp)
-app.register_blueprint(reporte_controllers.reporte_bp)
-app.register_blueprint(dashboard_bp, url_prefix='/dashboard')
+app.register_blueprint(audio_controllers.audio_bp, url_prefix='/audios')
+app.register_blueprint(usuario_controllers.usuario_bp, url_prefix='/usuarios')
+app.register_blueprint(bibliotecario_controllers.bibliotecario_bp, url_prefix='/bibliotecarios')
+app.register_blueprint(categoria_controllers.categoria_bp, url_prefix='/categorias')
+app.register_blueprint(autores_controllers.autor_bp, url_prefix='/autores')
+app.register_blueprint(editorial_controllers.editorial_bp, url_prefix='/editoriales')
+app.register_blueprint(video_controllers.video_bp, url_prefix='/videos')
+app.register_blueprint(libro_controllers.libro_bp, url_prefix='/libros')
+app.register_blueprint(material_controllers.material_bp, url_prefix='/materiales')
+app.register_blueprint(prestamo_controllers.prestamo_bp, url_prefix='/prestamos')
+app.register_blueprint(proyectos_academicos_controllers.proyecto_bp, url_prefix='/proyectos_academicos')
+app.register_blueprint(auth_controllers.auth_bp, url_prefix='/auth')
+app.register_blueprint(reporte_controllers.reporte_bp, url_prefix='/reportes')
+app.register_blueprint(dashboard_controllers.dashboard_bp, url_prefix='/dashboard')
+
 
 @app.route("/")
 def home():
@@ -60,8 +61,9 @@ def home():
 
     # Redirección lógica corregida
     if 'usuario_tipo' in session:
-        if session['usuario_tipo'].lower() == 'lector':
-            return render_template('home_lector.html', materiales=materiales)
+        if "usuario_tipo" in session and session['usuario_tipo'].lower() != 'Lector':
+            return redirect(url_for('dashboard.index'))
+            #return render_template('home_lector.html', materiales=materiales)
         else:
             return render_template('dashboard.html')
 
@@ -88,6 +90,7 @@ def crear_admin_inicial():
 @app.route('/carrera')
 def carrera():
     return render_template('carrera.html')
+
 
 if __name__ == "__main__":
     with app.app_context():
