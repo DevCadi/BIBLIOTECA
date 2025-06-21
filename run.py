@@ -12,7 +12,6 @@ from controllers import (
     auth_controllers, reporte_controllers,dashboard_controllers
 )
 
-
 app = Flask(__name__)
 app.secret_key = 'mi_clave_secreta_segura'
 
