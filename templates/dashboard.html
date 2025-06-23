@@ -213,10 +213,868 @@
     <p align="center">&copy; 2025 Biblioteca Virtual - Todos los derechos reservados</p>
   </footer>
   
+
+
+
+
+  
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/bootstrap.bundle.min.js"
     integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
     crossorigin="anonymous"
   > </script>
+
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --primary: linear-gradient(135deg, #00d4aa 0%, #00b8a3 100%);
+    --secondary: linear-gradient(135deg, #17e5d4 0%, #00ccc7 100%);
+    --accent: linear-gradient(135deg, #4dd0e1 0%, #00bcd4 100%);
+    --dark: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    --glass: rgba(0, 212, 170, 0.1);
+    --glass-border: rgba(0, 212, 170, 0.3);
+    --shadow-neon: 0 0 30px rgba(0, 212, 170, 0.4);
+    --shadow-float: 0 20px 40px rgba(0, 0, 0, 0.1);
+    --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  #chatbase-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 400px;
+    height: 600px;
+    background: linear-gradient(145deg, rgba(0, 212, 170, 0.1), rgba(0, 212, 170, 0.05));
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 25px;
+    box-shadow: var(--shadow-float), inset 0 1px 0 rgba(0, 212, 170, 0.2);
+    z-index: 9999;
+    overflow: hidden;
+    transform: translateY(100px) rotateX(15deg) scale(0.8);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.6s var(--transition-bounce);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  #chatbase-container.show {
+    transform: translateY(0) rotateX(0deg) scale(1);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  #chatbase-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, 
+      rgba(0, 212, 170, 0.1) 0%, 
+      rgba(0, 184, 163, 0.1) 25%,
+      rgba(23, 229, 212, 0.1) 50%,
+      rgba(77, 208, 225, 0.1) 75%,
+      rgba(0, 188, 212, 0.1) 100%);
+    border-radius: 25px;
+    opacity: 0.6;
+    animation: shimmer 8s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.8; }
+  }
+
+  .chat-header {
+    position: relative;
+    background: var(--primary);
+    color: white;
+    padding: 20px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 25px 25px 0 0;
+    overflow: hidden;
+    z-index: 2;
+  }
+
+  .chat-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+    animation: rotate 4s linear infinite;
+    pointer-events: none;
+  }
+
+  @keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .chat-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 1;
+    position: relative;
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    box-shadow: 0 4px 15px rgba(0, 188, 212, 0.4);
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+  }
+
+  .title-text h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    background: linear-gradient(45deg, #fff, #e0e0e0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .title-text p {
+    margin: 0;
+    font-size: 12px;
+    opacity: 0.9;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    background: #00ff88;
+    border-radius: 50%;
+    animation: pulse-glow 2s infinite;
+    box-shadow: 0 0 10px #00ff88;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { 
+      opacity: 1; 
+      box-shadow: 0 0 10px #00ff88;
+    }
+    50% { 
+      opacity: 0.7; 
+      box-shadow: 0 0 20px #00ff88, 0 0 30px #00ff88;
+    }
+  }
+
+  .header-controls {
+    display: flex;
+    gap: 8px;
+    z-index: 1;
+    position: relative;
+  }
+
+  .control-btn {
+    width: 35px;
+    height: 35px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s var(--transition-smooth);
+    font-size: 14px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Botón de cerrar más grande y destacado */
+  #chat-close-btn {
+    width: 42px;
+    height: 42px;
+    font-size: 18px;
+    font-weight: bold;
+    background: rgba(0, 212, 170, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+  }
+
+  #chat-close-btn:hover {
+    background: rgba(0, 212, 170, 0.6);
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 8px 25px rgba(0, 212, 170, 0.4);
+  }
+
+  .control-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    transform: translate(-50%, -50%);
+  }
+
+  .control-btn:hover::before {
+    width: 100%;
+    height: 100%;
+  }
+
+  .control-btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+  }
+
+  .control-btn:active {
+    transform: translateY(0) scale(0.95);
+  }
+
+  #chatbase-container iframe {
+    width: 100%;
+    height: calc(100% - 80px);
+    border: none;
+    background: rgba(248, 250, 252, 0.95);
+    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 1;
+  }
+
+  #chat-toggle-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 70px;
+    height: 70px;
+    border: none;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    transition: all 0.4s var(--transition-bounce);
+    box-shadow: var(--shadow-float), var(--shadow-neon);
+    position: fixed !important;
+    overflow: hidden;
+  }
+
+  #chat-toggle-btn::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: var(--secondary);
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  #chat-toggle-btn:hover::before {
+    opacity: 1;
+  }
+
+  #chat-toggle-btn:hover {
+    transform: scale(1.1) rotate(10deg);
+    box-shadow: var(--shadow-float), 0 0 40px rgba(0, 212, 170, 0.6);
+  }
+
+  #chat-toggle-btn:active {
+    transform: scale(0.9) rotate(-5deg);
+  }
+
+  #chat-toggle-btn.hidden {
+    transform: scale(0) rotate(180deg);
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .chat-icon {
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+  }
+
+  #chat-toggle-btn:hover .chat-icon {
+    transform: scale(1.1);
+  }
+
+  .notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--secondary);
+    color: white;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    transform: scale(0);
+    transition: all 0.4s var(--transition-bounce);
+    box-shadow: 0 4px 15px rgba(23, 229, 212, 0.4);
+    border: 2px solid white;
+  }
+
+  .notification-badge.show {
+    transform: scale(1);
+    animation: bounce-in 0.6s var(--transition-bounce);
+  }
+
+  @keyframes bounce-in {
+    0% { transform: scale(0) rotate(0deg); }
+    50% { transform: scale(1.3) rotate(180deg); }
+    100% { transform: scale(1) rotate(360deg); }
+  }
+
+  .floating-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    overflow: hidden;
+    border-radius: 25px;
+  }
+
+  .particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(0, 212, 170, 0.6);
+    border-radius: 50%;
+    animation: float-particles 8s linear infinite;
+  }
+
+  @keyframes float-particles {
+    0% {
+      transform: translateY(100vh) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-100px) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+  .particle:nth-child(2) { left: 20%; animation-delay: 1s; }
+  .particle:nth-child(3) { left: 30%; animation-delay: 2s; }
+  .particle:nth-child(4) { left: 40%; animation-delay: 3s; }
+  .particle:nth-child(5) { left: 50%; animation-delay: 4s; }
+  .particle:nth-child(6) { left: 60%; animation-delay: 5s; }
+  .particle:nth-child(7) { left: 70%; animation-delay: 6s; }
+  .particle:nth-child(8) { left: 80%; animation-delay: 7s; }
+
+  #chatbase-container.minimized {
+    height: 80px;
+    border-radius: 25px;
+  }
+
+  #chatbase-container.minimized iframe {
+    display: none;
+  }
+
+  .magic-cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background: var(--accent);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.1s ease;
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  .magic-cursor.active {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    #chatbase-container {
+      width: calc(100vw - 20px);
+      right: 10px;
+      left: auto;
+      height: calc(100vh - 100px);
+      bottom: 80px;
+      border-radius: 20px;
+    }
+
+    #chat-toggle-btn {
+      right: 15px;
+      left: auto;
+      bottom: 15px;
+      width: 60px;
+      height: 60px;
+      font-size: 24px;
+    }
+
+    .chat-header {
+      padding: 15px 20px;
+      border-radius: 20px 20px 0 0;
+    }
+
+    .avatar {
+      width: 35px;
+      height: 35px;
+      font-size: 16px;
+    }
+
+    .title-text h3 {
+      font-size: 16px;
+    }
+
+    #chat-close-btn {
+      width: 38px;
+      height: 38px;
+    }
+  }
+
+  @media (max-height: 600px) {
+    #chatbase-container {
+      height: calc(100vh - 60px);
+      bottom: 50px;
+    }
+  }
+
+  /* Asegurar que el botón siempre sea visible */
+  @media (max-width: 480px) {
+    #chat-toggle-btn {
+      right: 10px;
+      bottom: 10px;
+      width: 55px;
+      height: 55px;
+      font-size: 22px;
+    }
+  }
+
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    #chatbase-container {
+      background: linear-gradient(145deg, rgba(0, 212, 170, 0.2), rgba(0, 212, 170, 0.1));
+      border: 1px solid rgba(0, 212, 170, 0.2);
+    }
+    
+    #chatbase-container iframe {
+      background: rgba(18, 18, 18, 0.95);
+    }
+  }
+
+  /* Pantallas muy pequeñas */
+  @media (max-width: 360px) {
+    #chatbase-container {
+      width: calc(100vw - 10px);
+      right: 5px;
+    }
+    
+    #chat-toggle-btn {
+      right: 8px;
+      bottom: 8px;
+      width: 50px;
+      height: 50px;
+      font-size: 20px;
+    }
+  }
+</style>
+
+<!-- Cursor mágico -->
+<div class="magic-cursor" id="magic-cursor"></div>
+
+<!-- Botón principal flotante -->
+<button id="chat-toggle-btn" title="Abrir Asistente IA">
+  <div class="chat-icon">🤖</div>
+  <div class="notification-badge" id="notification-badge">✨</div>
+</button>
+
+<!-- Contenedor del chat -->
+<div id="chatbase-container">
+  <!-- Partículas flotantes -->
+  <div class="floating-particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+
+  <!-- Header futurista -->
+  <div class="chat-header">
+    <div class="chat-title">
+      <div class="avatar">🚀</div>
+      <div class="title-text">
+        <h3>Asistente Virtual LucY</h3>
+        <p><span class="status-dot"></span>Conectado • Ultra Rápido</p>
+      </div>
+    </div>
+    <div class="header-controls">
+      <button class="control-btn" id="minimize-btn" title="Minimizar">
+        <span>−</span>
+      </button>
+      <button class="control-btn" id="chat-close-btn" title="Cerrar">
+        <span>×</span>
+      </button>
+    </div>
+  </div>
+
+  <iframe
+    src="https://www.chatbase.co/chatbot-iframe/33KPxQ5L1YrrW5f_MHdYL"
+    allow="microphone; clipboard-read; clipboard-write"
+    loading="lazy"
+  ></iframe>
+</div>
+
+<script>
+  class FuturisticChatbot {
+    constructor() {
+      this.chatContainer = document.getElementById('chatbase-container');
+      this.toggleBtn = document.getElementById('chat-toggle-btn');
+      this.closeBtn = document.getElementById('chat-close-btn');
+      this.minimizeBtn = document.getElementById('minimize-btn');
+      this.notificationBadge = document.getElementById('notification-badge');
+      this.magicCursor = document.getElementById('magic-cursor');
+      
+      this.isOpen = false;
+      this.isMinimized = false;
+      this.messageCount = 0;
+      
+      this.init();
+    }
+
+    init() {
+      this.bindEvents();
+      this.initMagicCursor();
+      this.startNotificationSequence();
+      this.addSoundEffects();
+      this.ensureButtonVisibility();
+    }
+
+    bindEvents() {
+      this.toggleBtn.addEventListener('click', (e) => {
+        this.createRipple(e);
+        this.openChat();
+      });
+      
+      this.closeBtn.addEventListener('click', (e) => {
+        this.createRipple(e);
+        this.closeChat();
+      });
+      
+      this.minimizeBtn.addEventListener('click', (e) => {
+        this.createRipple(e);
+        this.toggleMinimize();
+      });
+
+      // Shortcuts de teclado
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && this.isOpen) {
+          this.closeChat();
+        }
+        if (e.ctrlKey && e.key === 'k') {
+          e.preventDefault();
+          this.isOpen ? this.closeChat() : this.openChat();
+        }
+      });
+
+      // Detectar inactividad
+      let inactivityTimer;
+      document.addEventListener('mousemove', () => {
+        clearTimeout(inactivityTimer);
+        inactivityTimer = setTimeout(() => {
+          if (!this.isOpen) this.showAttentionAnimation();
+        }, 30000);
+      });
+
+      // Asegurar visibilidad del botón en cambios de tamaño
+      window.addEventListener('resize', () => {
+        this.ensureButtonVisibility();
+      });
+    }
+
+    ensureButtonVisibility() {
+      // Asegurar que el botón siempre sea visible
+      const btn = this.toggleBtn;
+      const rect = btn.getBoundingClientRect();
+      const viewport = {
+        width: window.innerWidth,
+        height: window.innerHeight
+      };
+
+      // Si el botón está fuera del viewport, reposicionarlo
+      if (rect.right > viewport.width || rect.bottom > viewport.height) {
+        btn.style.right = '20px';
+        btn.style.bottom = '20px';
+      }
+    }
+
+    createRipple(e) {
+      const ripple = document.createElement('div');
+      const rect = e.target.getBoundingClientRect();
+      const size = 60;
+      const x = e.clientX - rect.left - size / 2;
+      const y = e.clientY - rect.top - size / 2;
+      
+      ripple.style.cssText = `
+        position: absolute;
+        width: ${size}px;
+        height: ${size}px;
+        left: ${x}px;
+        top: ${y}px;
+        background: rgba(0, 212, 170, 0.6);
+        border-radius: 50%;
+        transform: scale(0);
+        animation: ripple 0.6s ease-out;
+        pointer-events: none;
+        z-index: 1000;
+      `;
+      
+      e.target.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
+    }
+
+    openChat() {
+      this.isOpen = true;
+      this.chatContainer.classList.add('show');
+      this.toggleBtn.classList.add('hidden');
+      this.hideNotification();
+      this.playSound('open');
+      
+      // Efecto de partículas al abrir
+      this.createParticleExplosion();
+    }
+
+    closeChat() {
+      this.isOpen = false;
+      this.isMinimized = false;
+      this.chatContainer.classList.remove('show', 'minimized');
+      this.toggleBtn.classList.remove('hidden');
+      this.minimizeBtn.innerHTML = '<span>−</span>';
+      this.playSound('close');
+    }
+
+    toggleMinimize() {
+      this.isMinimized = !this.isMinimized;
+      
+      if (this.isMinimized) {
+        this.chatContainer.classList.add('minimized');
+        this.minimizeBtn.innerHTML = '<span>□</span>';
+        this.playSound('minimize');
+      } else {
+        this.chatContainer.classList.remove('minimized');
+        this.minimizeBtn.innerHTML = '<span>−</span>';
+        this.playSound('maximize');
+      }
+    }
+
+    showNotification() {
+      if (!this.isOpen) {
+        this.messageCount++;
+        this.notificationBadge.textContent = this.messageCount > 9 ? '9+' : this.messageCount;
+        this.notificationBadge.classList.add('show');
+        this.playSound('notification');
+      }
+    }
+
+    hideNotification() {
+      this.messageCount = 0;
+      this.notificationBadge.classList.remove('show');
+    }
+
+    initMagicCursor() {
+      let isNearChatbot = false;
+      
+      document.addEventListener('mousemove', (e) => {
+        const toggleBtnRect = this.toggleBtn.getBoundingClientRect();
+        const chatRect = this.chatContainer.getBoundingClientRect();
+        
+        const nearToggle = this.isNearElement(e, toggleBtnRect, 50);
+        const nearChat = this.isOpen && this.isNearElement(e, chatRect, 20);
+        
+        if (nearToggle || nearChat) {
+          if (!isNearChatbot) {
+            isNearChatbot = true;
+            this.magicCursor.classList.add('active');
+          }
+          this.magicCursor.style.left = e.clientX - 10 + 'px';
+          this.magicCursor.style.top = e.clientY - 10 + 'px';
+        } else {
+          if (isNearChatbot) {
+            isNearChatbot = false;
+            this.magicCursor.classList.remove('active');
+          }
+        }
+      });
+    }
+
+    isNearElement(mouseEvent, elementRect, threshold) {
+      return mouseEvent.clientX >= elementRect.left - threshold &&
+             mouseEvent.clientX <= elementRect.right + threshold &&
+             mouseEvent.clientY >= elementRect.top - threshold &&
+             mouseEvent.clientY <= elementRect.bottom + threshold;
+    }
+
+    createParticleExplosion() {
+      const colors = ['#00d4aa', '#00b8a3', '#17e5d4', '#4dd0e1', '#00bcd4'];
+      const btnRect = this.toggleBtn.getBoundingClientRect();
+      
+      for (let i = 0; i < 15; i++) {
+        const particle = document.createElement('div');
+        particle.style.cssText = `
+          position: fixed;
+          width: 6px;
+          height: 6px;
+          background: ${colors[Math.floor(Math.random() * colors.length)]};
+          border-radius: 50%;
+          z-index: 10001;
+          pointer-events: none;
+          left: ${btnRect.left + btnRect.width / 2}px;
+          top: ${btnRect.top + btnRect.height / 2}px;
+        `;
+        
+        document.body.appendChild(particle);
+        
+        const angle = (Math.PI * 2 * i) / 15;
+        const velocity = 100 + Math.random() * 100;
+        const vx = Math.cos(angle) * velocity;
+        const vy = Math.sin(angle) * velocity;
+        
+        particle.animate([
+          { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+          { transform: `translate(${vx}px, ${vy}px) scale(0)`, opacity: 0 }
+        ], {
+          duration: 1000,
+          easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+        }).onfinish = () => particle.remove();
+      }
+    }
+
+    showAttentionAnimation() {
+      this.toggleBtn.style.animation = 'none';
+      setTimeout(() => {
+        this.toggleBtn.style.animation = 'bounce-in 0.6s ease 3';
+      }, 10);
+    }
+
+    startNotificationSequence() {
+      // Simular notificaciones periódicas
+      const intervals = [8000, 15000, 25000, 40000];
+      intervals.forEach(interval => {
+        setTimeout(() => this.showNotification(), interval);
+      });
+    }
+
+    addSoundEffects() {
+      // Crear contexto de audio para efectos de sonido
+      try {
+        this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      } catch (e) {
+        console.log('Audio context not supported');
+      }
+    }
+
+    playSound(type) {
+      if (!this.audioContext) return;
+      
+      const oscillator = this.audioContext.createOscillator();
+      const gainNode = this.audioContext.createGain();
+      
+      const frequencies = {
+        open: [440, 880],
+        close: [880, 440],
+        minimize: [660],
+        maximize: [880],
+        notification: [523, 659, 784]
+      };
+      
+      const freq = frequencies[type] || [440];
+      oscillator.frequency.setValueAtTime(freq[0], this.audioContext.currentTime);
+      
+      if (freq.length > 1) {
+        freq.forEach((f, i) => {
+          oscillator.frequency.setValueAtTime(f, this.audioContext.currentTime + i * 0.1);
+        });
+      }
+      
+      gainNode.gain.setValueAtTime(0.1, this.audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + 0.3);
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(this.audioContext.destination);
+      
+      oscillator.start();
+      oscillator.stop(this.audioContext.currentTime + 0.3);
+    }
+  }
+
+  // Añadir estilos para animaciones dinámicas
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes ripple {
+      to {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+
+  // Inicializar cuando el DOM esté listo
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => new FuturisticChatbot());
+  } else {
+    new FuturisticChatbot();
+  }
+</script>
+
+
 </body>
 </html>
